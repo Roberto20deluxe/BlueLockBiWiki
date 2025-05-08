@@ -1,4 +1,4 @@
-<h1 align ="center"></img><br><img src="readme_graphics/BlueLockLogo.svg" alt="BLlogo"  width = "360vw"></img></h1>
+<h1 align = center><img src="readme_graphics/BlueLockLogo.svg" alt="BLlogo" width="360vw"></h1>
 
 <h2>Description</h2>
     
