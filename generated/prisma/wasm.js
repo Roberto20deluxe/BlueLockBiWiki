@@ -123,7 +123,63 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  email: 'email'
+  email: 'email',
+  password: 'password',
+  favBLPlayer: 'favBLPlayer'
+};
+
+exports.Prisma.BLPlayerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  birthDate: 'birthDate',
+  zodiac: 'zodiac',
+  birthPlace: 'birthPlace',
+  family: 'family',
+  height: 'height',
+  shoeSize: 'shoeSize',
+  vision: 'vision',
+  bloodType: 'bloodType',
+  proTeam: 'proTeam',
+  domLeg: 'domLeg',
+  favPlayer: 'favPlayer',
+  startAge: 'startAge',
+  motto: 'motto',
+  nickname: 'nickname',
+  quality: 'quality',
+  defect: 'defect',
+  favFood: 'favFood',
+  hateFood: 'hateFood',
+  riceSideDish: 'riceSideDish',
+  hobbies: 'hobbies',
+  favSeason: 'favSeason',
+  favStrong: 'favStrong',
+  favMovie: 'favMovie',
+  favColor: 'favColor',
+  favFamous: 'favFamous',
+  favAnimal: 'favAnimal',
+  favSubject: 'favSubject',
+  hateSubject: 'hateSubject',
+  freqMagazine: 'freqMagazine',
+  fetish: 'fetish',
+  makesHappy: 'makesHappy',
+  makesSad: 'makesSad',
+  partnerType: 'partnerType',
+  firstLoveAge: 'firstLoveAge',
+  firstConfession: 'firstConfession',
+  valentineChoco: 'valentineChoco',
+  sleepTime: 'sleepTime',
+  firstWash: 'firstWash',
+  alwaysBuy: 'alwaysBuy',
+  criedRecently: 'criedRecently',
+  disbeliefSanta: 'disbeliefSanta',
+  giftSanta: 'giftSanta',
+  lastDayPlan: 'lastDayPlan',
+  richPlan: 'richPlan',
+  weekendPlan: 'weekendPlan',
+  altCareer: 'altCareer',
+  favHistoryChar: 'favHistoryChar',
+  oneObject: 'oneObject',
+  timeMachine: 'timeMachine'
 };
 
 exports.Prisma.SortOrder = {
@@ -136,9 +192,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  BLPlayer: 'BLPlayer'
 };
 
 /**

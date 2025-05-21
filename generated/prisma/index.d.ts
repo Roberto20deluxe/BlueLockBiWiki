@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model BLPlayer
+ * 
+ */
+export type BLPlayer = $Result.DefaultSelection<Prisma.$BLPlayerPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bLPlayer`: Exposes CRUD operations for the **BLPlayer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BLPlayers
+    * const bLPlayers = await prisma.bLPlayer.findMany()
+    * ```
+    */
+  get bLPlayer(): Prisma.BLPlayerDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    BLPlayer: 'BLPlayer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "bLPlayer"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      BLPlayer: {
+        payload: Prisma.$BLPlayerPayload<ExtArgs>
+        fields: Prisma.BLPlayerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BLPlayerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BLPlayerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          findFirst: {
+            args: Prisma.BLPlayerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BLPlayerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          findMany: {
+            args: Prisma.BLPlayerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>[]
+          }
+          create: {
+            args: Prisma.BLPlayerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          createMany: {
+            args: Prisma.BLPlayerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BLPlayerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>[]
+          }
+          delete: {
+            args: Prisma.BLPlayerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          update: {
+            args: Prisma.BLPlayerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          deleteMany: {
+            args: Prisma.BLPlayerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BLPlayerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BLPlayerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>[]
+          }
+          upsert: {
+            args: Prisma.BLPlayerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BLPlayerPayload>
+          }
+          aggregate: {
+            args: Prisma.BLPlayerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBLPlayer>
+          }
+          groupBy: {
+            args: Prisma.BLPlayerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BLPlayerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BLPlayerCountArgs<ExtArgs>
+            result: $Utils.Optional<BLPlayerCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    bLPlayer?: BLPlayerOmit
   }
 
   /* Types for Logging */
@@ -883,18 +974,24 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
+    password: string | null
+    favBLPlayer: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     name: string | null
     email: string | null
+    password: string | null
+    favBLPlayer: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     name: number
     email: number
+    password: number
+    favBLPlayer: number
     _all: number
   }
 
@@ -903,18 +1000,24 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    password?: true
+    favBLPlayer?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    password?: true
+    favBLPlayer?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    password?: true
+    favBLPlayer?: true
     _all?: true
   }
 
@@ -994,6 +1097,8 @@ export namespace Prisma {
     id: string
     name: string
     email: string
+    password: string
+    favBLPlayer: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1017,27 +1122,35 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    password?: boolean
+    favBLPlayer?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
+    password?: boolean
+    favBLPlayer?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
+    password?: boolean
+    favBLPlayer?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     name?: boolean
     email?: boolean
+    password?: boolean
+    favBLPlayer?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "favBLPlayer", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1046,6 +1159,8 @@ export namespace Prisma {
       id: string
       name: string
       email: string
+      password: string
+      favBLPlayer: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1472,6 +1587,8 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly favBLPlayer: FieldRef<"User", 'String'>
   }
     
 
@@ -1839,6 +1956,1641 @@ export namespace Prisma {
 
 
   /**
+   * Model BLPlayer
+   */
+
+  export type AggregateBLPlayer = {
+    _count: BLPlayerCountAggregateOutputType | null
+    _avg: BLPlayerAvgAggregateOutputType | null
+    _sum: BLPlayerSumAggregateOutputType | null
+    _min: BLPlayerMinAggregateOutputType | null
+    _max: BLPlayerMaxAggregateOutputType | null
+  }
+
+  export type BLPlayerAvgAggregateOutputType = {
+    height: number | null
+    shoeSize: number | null
+    vision: number | null
+  }
+
+  export type BLPlayerSumAggregateOutputType = {
+    height: number | null
+    shoeSize: number | null
+    vision: number | null
+  }
+
+  export type BLPlayerMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    birthDate: string | null
+    zodiac: string | null
+    birthPlace: string | null
+    family: string | null
+    height: number | null
+    shoeSize: number | null
+    vision: number | null
+    bloodType: string | null
+    proTeam: string | null
+    domLeg: string | null
+    favPlayer: string | null
+    startAge: string | null
+    motto: string | null
+    nickname: string | null
+    quality: string | null
+    defect: string | null
+    favFood: string | null
+    hateFood: string | null
+    riceSideDish: string | null
+    hobbies: string | null
+    favSeason: string | null
+    favStrong: string | null
+    favMovie: string | null
+    favColor: string | null
+    favFamous: string | null
+    favAnimal: string | null
+    favSubject: string | null
+    hateSubject: string | null
+    freqMagazine: string | null
+    fetish: string | null
+    makesHappy: string | null
+    makesSad: string | null
+    partnerType: string | null
+    firstLoveAge: string | null
+    firstConfession: string | null
+    valentineChoco: string | null
+    sleepTime: string | null
+    firstWash: string | null
+    alwaysBuy: string | null
+    criedRecently: string | null
+    disbeliefSanta: string | null
+    giftSanta: string | null
+    lastDayPlan: string | null
+    richPlan: string | null
+    weekendPlan: string | null
+    altCareer: string | null
+    favHistoryChar: string | null
+    oneObject: string | null
+    timeMachine: string | null
+  }
+
+  export type BLPlayerMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    birthDate: string | null
+    zodiac: string | null
+    birthPlace: string | null
+    family: string | null
+    height: number | null
+    shoeSize: number | null
+    vision: number | null
+    bloodType: string | null
+    proTeam: string | null
+    domLeg: string | null
+    favPlayer: string | null
+    startAge: string | null
+    motto: string | null
+    nickname: string | null
+    quality: string | null
+    defect: string | null
+    favFood: string | null
+    hateFood: string | null
+    riceSideDish: string | null
+    hobbies: string | null
+    favSeason: string | null
+    favStrong: string | null
+    favMovie: string | null
+    favColor: string | null
+    favFamous: string | null
+    favAnimal: string | null
+    favSubject: string | null
+    hateSubject: string | null
+    freqMagazine: string | null
+    fetish: string | null
+    makesHappy: string | null
+    makesSad: string | null
+    partnerType: string | null
+    firstLoveAge: string | null
+    firstConfession: string | null
+    valentineChoco: string | null
+    sleepTime: string | null
+    firstWash: string | null
+    alwaysBuy: string | null
+    criedRecently: string | null
+    disbeliefSanta: string | null
+    giftSanta: string | null
+    lastDayPlan: string | null
+    richPlan: string | null
+    weekendPlan: string | null
+    altCareer: string | null
+    favHistoryChar: string | null
+    oneObject: string | null
+    timeMachine: string | null
+  }
+
+  export type BLPlayerCountAggregateOutputType = {
+    id: number
+    name: number
+    birthDate: number
+    zodiac: number
+    birthPlace: number
+    family: number
+    height: number
+    shoeSize: number
+    vision: number
+    bloodType: number
+    proTeam: number
+    domLeg: number
+    favPlayer: number
+    startAge: number
+    motto: number
+    nickname: number
+    quality: number
+    defect: number
+    favFood: number
+    hateFood: number
+    riceSideDish: number
+    hobbies: number
+    favSeason: number
+    favStrong: number
+    favMovie: number
+    favColor: number
+    favFamous: number
+    favAnimal: number
+    favSubject: number
+    hateSubject: number
+    freqMagazine: number
+    fetish: number
+    makesHappy: number
+    makesSad: number
+    partnerType: number
+    firstLoveAge: number
+    firstConfession: number
+    valentineChoco: number
+    sleepTime: number
+    firstWash: number
+    alwaysBuy: number
+    criedRecently: number
+    disbeliefSanta: number
+    giftSanta: number
+    lastDayPlan: number
+    richPlan: number
+    weekendPlan: number
+    altCareer: number
+    favHistoryChar: number
+    oneObject: number
+    timeMachine: number
+    _all: number
+  }
+
+
+  export type BLPlayerAvgAggregateInputType = {
+    height?: true
+    shoeSize?: true
+    vision?: true
+  }
+
+  export type BLPlayerSumAggregateInputType = {
+    height?: true
+    shoeSize?: true
+    vision?: true
+  }
+
+  export type BLPlayerMinAggregateInputType = {
+    id?: true
+    name?: true
+    birthDate?: true
+    zodiac?: true
+    birthPlace?: true
+    family?: true
+    height?: true
+    shoeSize?: true
+    vision?: true
+    bloodType?: true
+    proTeam?: true
+    domLeg?: true
+    favPlayer?: true
+    startAge?: true
+    motto?: true
+    nickname?: true
+    quality?: true
+    defect?: true
+    favFood?: true
+    hateFood?: true
+    riceSideDish?: true
+    hobbies?: true
+    favSeason?: true
+    favStrong?: true
+    favMovie?: true
+    favColor?: true
+    favFamous?: true
+    favAnimal?: true
+    favSubject?: true
+    hateSubject?: true
+    freqMagazine?: true
+    fetish?: true
+    makesHappy?: true
+    makesSad?: true
+    partnerType?: true
+    firstLoveAge?: true
+    firstConfession?: true
+    valentineChoco?: true
+    sleepTime?: true
+    firstWash?: true
+    alwaysBuy?: true
+    criedRecently?: true
+    disbeliefSanta?: true
+    giftSanta?: true
+    lastDayPlan?: true
+    richPlan?: true
+    weekendPlan?: true
+    altCareer?: true
+    favHistoryChar?: true
+    oneObject?: true
+    timeMachine?: true
+  }
+
+  export type BLPlayerMaxAggregateInputType = {
+    id?: true
+    name?: true
+    birthDate?: true
+    zodiac?: true
+    birthPlace?: true
+    family?: true
+    height?: true
+    shoeSize?: true
+    vision?: true
+    bloodType?: true
+    proTeam?: true
+    domLeg?: true
+    favPlayer?: true
+    startAge?: true
+    motto?: true
+    nickname?: true
+    quality?: true
+    defect?: true
+    favFood?: true
+    hateFood?: true
+    riceSideDish?: true
+    hobbies?: true
+    favSeason?: true
+    favStrong?: true
+    favMovie?: true
+    favColor?: true
+    favFamous?: true
+    favAnimal?: true
+    favSubject?: true
+    hateSubject?: true
+    freqMagazine?: true
+    fetish?: true
+    makesHappy?: true
+    makesSad?: true
+    partnerType?: true
+    firstLoveAge?: true
+    firstConfession?: true
+    valentineChoco?: true
+    sleepTime?: true
+    firstWash?: true
+    alwaysBuy?: true
+    criedRecently?: true
+    disbeliefSanta?: true
+    giftSanta?: true
+    lastDayPlan?: true
+    richPlan?: true
+    weekendPlan?: true
+    altCareer?: true
+    favHistoryChar?: true
+    oneObject?: true
+    timeMachine?: true
+  }
+
+  export type BLPlayerCountAggregateInputType = {
+    id?: true
+    name?: true
+    birthDate?: true
+    zodiac?: true
+    birthPlace?: true
+    family?: true
+    height?: true
+    shoeSize?: true
+    vision?: true
+    bloodType?: true
+    proTeam?: true
+    domLeg?: true
+    favPlayer?: true
+    startAge?: true
+    motto?: true
+    nickname?: true
+    quality?: true
+    defect?: true
+    favFood?: true
+    hateFood?: true
+    riceSideDish?: true
+    hobbies?: true
+    favSeason?: true
+    favStrong?: true
+    favMovie?: true
+    favColor?: true
+    favFamous?: true
+    favAnimal?: true
+    favSubject?: true
+    hateSubject?: true
+    freqMagazine?: true
+    fetish?: true
+    makesHappy?: true
+    makesSad?: true
+    partnerType?: true
+    firstLoveAge?: true
+    firstConfession?: true
+    valentineChoco?: true
+    sleepTime?: true
+    firstWash?: true
+    alwaysBuy?: true
+    criedRecently?: true
+    disbeliefSanta?: true
+    giftSanta?: true
+    lastDayPlan?: true
+    richPlan?: true
+    weekendPlan?: true
+    altCareer?: true
+    favHistoryChar?: true
+    oneObject?: true
+    timeMachine?: true
+    _all?: true
+  }
+
+  export type BLPlayerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BLPlayer to aggregate.
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BLPlayers to fetch.
+     */
+    orderBy?: BLPlayerOrderByWithRelationInput | BLPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BLPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BLPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BLPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BLPlayers
+    **/
+    _count?: true | BLPlayerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BLPlayerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BLPlayerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BLPlayerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BLPlayerMaxAggregateInputType
+  }
+
+  export type GetBLPlayerAggregateType<T extends BLPlayerAggregateArgs> = {
+        [P in keyof T & keyof AggregateBLPlayer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBLPlayer[P]>
+      : GetScalarType<T[P], AggregateBLPlayer[P]>
+  }
+
+
+
+
+  export type BLPlayerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BLPlayerWhereInput
+    orderBy?: BLPlayerOrderByWithAggregationInput | BLPlayerOrderByWithAggregationInput[]
+    by: BLPlayerScalarFieldEnum[] | BLPlayerScalarFieldEnum
+    having?: BLPlayerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BLPlayerCountAggregateInputType | true
+    _avg?: BLPlayerAvgAggregateInputType
+    _sum?: BLPlayerSumAggregateInputType
+    _min?: BLPlayerMinAggregateInputType
+    _max?: BLPlayerMaxAggregateInputType
+  }
+
+  export type BLPlayerGroupByOutputType = {
+    id: string
+    name: string
+    birthDate: string
+    zodiac: string
+    birthPlace: string
+    family: string
+    height: number
+    shoeSize: number
+    vision: number
+    bloodType: string
+    proTeam: string
+    domLeg: string
+    favPlayer: string
+    startAge: string
+    motto: string
+    nickname: string
+    quality: string
+    defect: string
+    favFood: string
+    hateFood: string
+    riceSideDish: string
+    hobbies: string
+    favSeason: string
+    favStrong: string
+    favMovie: string
+    favColor: string
+    favFamous: string
+    favAnimal: string
+    favSubject: string
+    hateSubject: string
+    freqMagazine: string
+    fetish: string
+    makesHappy: string
+    makesSad: string
+    partnerType: string
+    firstLoveAge: string
+    firstConfession: string
+    valentineChoco: string
+    sleepTime: string
+    firstWash: string
+    alwaysBuy: string
+    criedRecently: string
+    disbeliefSanta: string
+    giftSanta: string
+    lastDayPlan: string
+    richPlan: string
+    weekendPlan: string
+    altCareer: string
+    favHistoryChar: string
+    oneObject: string
+    timeMachine: string
+    _count: BLPlayerCountAggregateOutputType | null
+    _avg: BLPlayerAvgAggregateOutputType | null
+    _sum: BLPlayerSumAggregateOutputType | null
+    _min: BLPlayerMinAggregateOutputType | null
+    _max: BLPlayerMaxAggregateOutputType | null
+  }
+
+  type GetBLPlayerGroupByPayload<T extends BLPlayerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BLPlayerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BLPlayerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BLPlayerGroupByOutputType[P]>
+            : GetScalarType<T[P], BLPlayerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BLPlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    birthDate?: boolean
+    zodiac?: boolean
+    birthPlace?: boolean
+    family?: boolean
+    height?: boolean
+    shoeSize?: boolean
+    vision?: boolean
+    bloodType?: boolean
+    proTeam?: boolean
+    domLeg?: boolean
+    favPlayer?: boolean
+    startAge?: boolean
+    motto?: boolean
+    nickname?: boolean
+    quality?: boolean
+    defect?: boolean
+    favFood?: boolean
+    hateFood?: boolean
+    riceSideDish?: boolean
+    hobbies?: boolean
+    favSeason?: boolean
+    favStrong?: boolean
+    favMovie?: boolean
+    favColor?: boolean
+    favFamous?: boolean
+    favAnimal?: boolean
+    favSubject?: boolean
+    hateSubject?: boolean
+    freqMagazine?: boolean
+    fetish?: boolean
+    makesHappy?: boolean
+    makesSad?: boolean
+    partnerType?: boolean
+    firstLoveAge?: boolean
+    firstConfession?: boolean
+    valentineChoco?: boolean
+    sleepTime?: boolean
+    firstWash?: boolean
+    alwaysBuy?: boolean
+    criedRecently?: boolean
+    disbeliefSanta?: boolean
+    giftSanta?: boolean
+    lastDayPlan?: boolean
+    richPlan?: boolean
+    weekendPlan?: boolean
+    altCareer?: boolean
+    favHistoryChar?: boolean
+    oneObject?: boolean
+    timeMachine?: boolean
+  }, ExtArgs["result"]["bLPlayer"]>
+
+  export type BLPlayerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    birthDate?: boolean
+    zodiac?: boolean
+    birthPlace?: boolean
+    family?: boolean
+    height?: boolean
+    shoeSize?: boolean
+    vision?: boolean
+    bloodType?: boolean
+    proTeam?: boolean
+    domLeg?: boolean
+    favPlayer?: boolean
+    startAge?: boolean
+    motto?: boolean
+    nickname?: boolean
+    quality?: boolean
+    defect?: boolean
+    favFood?: boolean
+    hateFood?: boolean
+    riceSideDish?: boolean
+    hobbies?: boolean
+    favSeason?: boolean
+    favStrong?: boolean
+    favMovie?: boolean
+    favColor?: boolean
+    favFamous?: boolean
+    favAnimal?: boolean
+    favSubject?: boolean
+    hateSubject?: boolean
+    freqMagazine?: boolean
+    fetish?: boolean
+    makesHappy?: boolean
+    makesSad?: boolean
+    partnerType?: boolean
+    firstLoveAge?: boolean
+    firstConfession?: boolean
+    valentineChoco?: boolean
+    sleepTime?: boolean
+    firstWash?: boolean
+    alwaysBuy?: boolean
+    criedRecently?: boolean
+    disbeliefSanta?: boolean
+    giftSanta?: boolean
+    lastDayPlan?: boolean
+    richPlan?: boolean
+    weekendPlan?: boolean
+    altCareer?: boolean
+    favHistoryChar?: boolean
+    oneObject?: boolean
+    timeMachine?: boolean
+  }, ExtArgs["result"]["bLPlayer"]>
+
+  export type BLPlayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    birthDate?: boolean
+    zodiac?: boolean
+    birthPlace?: boolean
+    family?: boolean
+    height?: boolean
+    shoeSize?: boolean
+    vision?: boolean
+    bloodType?: boolean
+    proTeam?: boolean
+    domLeg?: boolean
+    favPlayer?: boolean
+    startAge?: boolean
+    motto?: boolean
+    nickname?: boolean
+    quality?: boolean
+    defect?: boolean
+    favFood?: boolean
+    hateFood?: boolean
+    riceSideDish?: boolean
+    hobbies?: boolean
+    favSeason?: boolean
+    favStrong?: boolean
+    favMovie?: boolean
+    favColor?: boolean
+    favFamous?: boolean
+    favAnimal?: boolean
+    favSubject?: boolean
+    hateSubject?: boolean
+    freqMagazine?: boolean
+    fetish?: boolean
+    makesHappy?: boolean
+    makesSad?: boolean
+    partnerType?: boolean
+    firstLoveAge?: boolean
+    firstConfession?: boolean
+    valentineChoco?: boolean
+    sleepTime?: boolean
+    firstWash?: boolean
+    alwaysBuy?: boolean
+    criedRecently?: boolean
+    disbeliefSanta?: boolean
+    giftSanta?: boolean
+    lastDayPlan?: boolean
+    richPlan?: boolean
+    weekendPlan?: boolean
+    altCareer?: boolean
+    favHistoryChar?: boolean
+    oneObject?: boolean
+    timeMachine?: boolean
+  }, ExtArgs["result"]["bLPlayer"]>
+
+  export type BLPlayerSelectScalar = {
+    id?: boolean
+    name?: boolean
+    birthDate?: boolean
+    zodiac?: boolean
+    birthPlace?: boolean
+    family?: boolean
+    height?: boolean
+    shoeSize?: boolean
+    vision?: boolean
+    bloodType?: boolean
+    proTeam?: boolean
+    domLeg?: boolean
+    favPlayer?: boolean
+    startAge?: boolean
+    motto?: boolean
+    nickname?: boolean
+    quality?: boolean
+    defect?: boolean
+    favFood?: boolean
+    hateFood?: boolean
+    riceSideDish?: boolean
+    hobbies?: boolean
+    favSeason?: boolean
+    favStrong?: boolean
+    favMovie?: boolean
+    favColor?: boolean
+    favFamous?: boolean
+    favAnimal?: boolean
+    favSubject?: boolean
+    hateSubject?: boolean
+    freqMagazine?: boolean
+    fetish?: boolean
+    makesHappy?: boolean
+    makesSad?: boolean
+    partnerType?: boolean
+    firstLoveAge?: boolean
+    firstConfession?: boolean
+    valentineChoco?: boolean
+    sleepTime?: boolean
+    firstWash?: boolean
+    alwaysBuy?: boolean
+    criedRecently?: boolean
+    disbeliefSanta?: boolean
+    giftSanta?: boolean
+    lastDayPlan?: boolean
+    richPlan?: boolean
+    weekendPlan?: boolean
+    altCareer?: boolean
+    favHistoryChar?: boolean
+    oneObject?: boolean
+    timeMachine?: boolean
+  }
+
+  export type BLPlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "birthDate" | "zodiac" | "birthPlace" | "family" | "height" | "shoeSize" | "vision" | "bloodType" | "proTeam" | "domLeg" | "favPlayer" | "startAge" | "motto" | "nickname" | "quality" | "defect" | "favFood" | "hateFood" | "riceSideDish" | "hobbies" | "favSeason" | "favStrong" | "favMovie" | "favColor" | "favFamous" | "favAnimal" | "favSubject" | "hateSubject" | "freqMagazine" | "fetish" | "makesHappy" | "makesSad" | "partnerType" | "firstLoveAge" | "firstConfession" | "valentineChoco" | "sleepTime" | "firstWash" | "alwaysBuy" | "criedRecently" | "disbeliefSanta" | "giftSanta" | "lastDayPlan" | "richPlan" | "weekendPlan" | "altCareer" | "favHistoryChar" | "oneObject" | "timeMachine", ExtArgs["result"]["bLPlayer"]>
+
+  export type $BLPlayerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BLPlayer"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      birthDate: string
+      zodiac: string
+      birthPlace: string
+      family: string
+      height: number
+      shoeSize: number
+      vision: number
+      bloodType: string
+      proTeam: string
+      domLeg: string
+      favPlayer: string
+      startAge: string
+      motto: string
+      nickname: string
+      quality: string
+      defect: string
+      favFood: string
+      hateFood: string
+      riceSideDish: string
+      hobbies: string
+      favSeason: string
+      favStrong: string
+      favMovie: string
+      favColor: string
+      favFamous: string
+      favAnimal: string
+      favSubject: string
+      hateSubject: string
+      freqMagazine: string
+      fetish: string
+      makesHappy: string
+      makesSad: string
+      partnerType: string
+      firstLoveAge: string
+      firstConfession: string
+      valentineChoco: string
+      sleepTime: string
+      firstWash: string
+      alwaysBuy: string
+      criedRecently: string
+      disbeliefSanta: string
+      giftSanta: string
+      lastDayPlan: string
+      richPlan: string
+      weekendPlan: string
+      altCareer: string
+      favHistoryChar: string
+      oneObject: string
+      timeMachine: string
+    }, ExtArgs["result"]["bLPlayer"]>
+    composites: {}
+  }
+
+  type BLPlayerGetPayload<S extends boolean | null | undefined | BLPlayerDefaultArgs> = $Result.GetResult<Prisma.$BLPlayerPayload, S>
+
+  type BLPlayerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BLPlayerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BLPlayerCountAggregateInputType | true
+    }
+
+  export interface BLPlayerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BLPlayer'], meta: { name: 'BLPlayer' } }
+    /**
+     * Find zero or one BLPlayer that matches the filter.
+     * @param {BLPlayerFindUniqueArgs} args - Arguments to find a BLPlayer
+     * @example
+     * // Get one BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BLPlayerFindUniqueArgs>(args: SelectSubset<T, BLPlayerFindUniqueArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BLPlayer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BLPlayerFindUniqueOrThrowArgs} args - Arguments to find a BLPlayer
+     * @example
+     * // Get one BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BLPlayerFindUniqueOrThrowArgs>(args: SelectSubset<T, BLPlayerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BLPlayer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerFindFirstArgs} args - Arguments to find a BLPlayer
+     * @example
+     * // Get one BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BLPlayerFindFirstArgs>(args?: SelectSubset<T, BLPlayerFindFirstArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BLPlayer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerFindFirstOrThrowArgs} args - Arguments to find a BLPlayer
+     * @example
+     * // Get one BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BLPlayerFindFirstOrThrowArgs>(args?: SelectSubset<T, BLPlayerFindFirstOrThrowArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BLPlayers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BLPlayers
+     * const bLPlayers = await prisma.bLPlayer.findMany()
+     * 
+     * // Get first 10 BLPlayers
+     * const bLPlayers = await prisma.bLPlayer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bLPlayerWithIdOnly = await prisma.bLPlayer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BLPlayerFindManyArgs>(args?: SelectSubset<T, BLPlayerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BLPlayer.
+     * @param {BLPlayerCreateArgs} args - Arguments to create a BLPlayer.
+     * @example
+     * // Create one BLPlayer
+     * const BLPlayer = await prisma.bLPlayer.create({
+     *   data: {
+     *     // ... data to create a BLPlayer
+     *   }
+     * })
+     * 
+     */
+    create<T extends BLPlayerCreateArgs>(args: SelectSubset<T, BLPlayerCreateArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BLPlayers.
+     * @param {BLPlayerCreateManyArgs} args - Arguments to create many BLPlayers.
+     * @example
+     * // Create many BLPlayers
+     * const bLPlayer = await prisma.bLPlayer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BLPlayerCreateManyArgs>(args?: SelectSubset<T, BLPlayerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BLPlayers and returns the data saved in the database.
+     * @param {BLPlayerCreateManyAndReturnArgs} args - Arguments to create many BLPlayers.
+     * @example
+     * // Create many BLPlayers
+     * const bLPlayer = await prisma.bLPlayer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BLPlayers and only return the `id`
+     * const bLPlayerWithIdOnly = await prisma.bLPlayer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BLPlayerCreateManyAndReturnArgs>(args?: SelectSubset<T, BLPlayerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BLPlayer.
+     * @param {BLPlayerDeleteArgs} args - Arguments to delete one BLPlayer.
+     * @example
+     * // Delete one BLPlayer
+     * const BLPlayer = await prisma.bLPlayer.delete({
+     *   where: {
+     *     // ... filter to delete one BLPlayer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BLPlayerDeleteArgs>(args: SelectSubset<T, BLPlayerDeleteArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BLPlayer.
+     * @param {BLPlayerUpdateArgs} args - Arguments to update one BLPlayer.
+     * @example
+     * // Update one BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BLPlayerUpdateArgs>(args: SelectSubset<T, BLPlayerUpdateArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BLPlayers.
+     * @param {BLPlayerDeleteManyArgs} args - Arguments to filter BLPlayers to delete.
+     * @example
+     * // Delete a few BLPlayers
+     * const { count } = await prisma.bLPlayer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BLPlayerDeleteManyArgs>(args?: SelectSubset<T, BLPlayerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BLPlayers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BLPlayers
+     * const bLPlayer = await prisma.bLPlayer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BLPlayerUpdateManyArgs>(args: SelectSubset<T, BLPlayerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BLPlayers and returns the data updated in the database.
+     * @param {BLPlayerUpdateManyAndReturnArgs} args - Arguments to update many BLPlayers.
+     * @example
+     * // Update many BLPlayers
+     * const bLPlayer = await prisma.bLPlayer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BLPlayers and only return the `id`
+     * const bLPlayerWithIdOnly = await prisma.bLPlayer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BLPlayerUpdateManyAndReturnArgs>(args: SelectSubset<T, BLPlayerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BLPlayer.
+     * @param {BLPlayerUpsertArgs} args - Arguments to update or create a BLPlayer.
+     * @example
+     * // Update or create a BLPlayer
+     * const bLPlayer = await prisma.bLPlayer.upsert({
+     *   create: {
+     *     // ... data to create a BLPlayer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BLPlayer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BLPlayerUpsertArgs>(args: SelectSubset<T, BLPlayerUpsertArgs<ExtArgs>>): Prisma__BLPlayerClient<$Result.GetResult<Prisma.$BLPlayerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BLPlayers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerCountArgs} args - Arguments to filter BLPlayers to count.
+     * @example
+     * // Count the number of BLPlayers
+     * const count = await prisma.bLPlayer.count({
+     *   where: {
+     *     // ... the filter for the BLPlayers we want to count
+     *   }
+     * })
+    **/
+    count<T extends BLPlayerCountArgs>(
+      args?: Subset<T, BLPlayerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BLPlayerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BLPlayer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BLPlayerAggregateArgs>(args: Subset<T, BLPlayerAggregateArgs>): Prisma.PrismaPromise<GetBLPlayerAggregateType<T>>
+
+    /**
+     * Group by BLPlayer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BLPlayerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BLPlayerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BLPlayerGroupByArgs['orderBy'] }
+        : { orderBy?: BLPlayerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BLPlayerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBLPlayerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BLPlayer model
+   */
+  readonly fields: BLPlayerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BLPlayer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BLPlayerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BLPlayer model
+   */
+  interface BLPlayerFieldRefs {
+    readonly id: FieldRef<"BLPlayer", 'String'>
+    readonly name: FieldRef<"BLPlayer", 'String'>
+    readonly birthDate: FieldRef<"BLPlayer", 'String'>
+    readonly zodiac: FieldRef<"BLPlayer", 'String'>
+    readonly birthPlace: FieldRef<"BLPlayer", 'String'>
+    readonly family: FieldRef<"BLPlayer", 'String'>
+    readonly height: FieldRef<"BLPlayer", 'Float'>
+    readonly shoeSize: FieldRef<"BLPlayer", 'Int'>
+    readonly vision: FieldRef<"BLPlayer", 'Float'>
+    readonly bloodType: FieldRef<"BLPlayer", 'String'>
+    readonly proTeam: FieldRef<"BLPlayer", 'String'>
+    readonly domLeg: FieldRef<"BLPlayer", 'String'>
+    readonly favPlayer: FieldRef<"BLPlayer", 'String'>
+    readonly startAge: FieldRef<"BLPlayer", 'String'>
+    readonly motto: FieldRef<"BLPlayer", 'String'>
+    readonly nickname: FieldRef<"BLPlayer", 'String'>
+    readonly quality: FieldRef<"BLPlayer", 'String'>
+    readonly defect: FieldRef<"BLPlayer", 'String'>
+    readonly favFood: FieldRef<"BLPlayer", 'String'>
+    readonly hateFood: FieldRef<"BLPlayer", 'String'>
+    readonly riceSideDish: FieldRef<"BLPlayer", 'String'>
+    readonly hobbies: FieldRef<"BLPlayer", 'String'>
+    readonly favSeason: FieldRef<"BLPlayer", 'String'>
+    readonly favStrong: FieldRef<"BLPlayer", 'String'>
+    readonly favMovie: FieldRef<"BLPlayer", 'String'>
+    readonly favColor: FieldRef<"BLPlayer", 'String'>
+    readonly favFamous: FieldRef<"BLPlayer", 'String'>
+    readonly favAnimal: FieldRef<"BLPlayer", 'String'>
+    readonly favSubject: FieldRef<"BLPlayer", 'String'>
+    readonly hateSubject: FieldRef<"BLPlayer", 'String'>
+    readonly freqMagazine: FieldRef<"BLPlayer", 'String'>
+    readonly fetish: FieldRef<"BLPlayer", 'String'>
+    readonly makesHappy: FieldRef<"BLPlayer", 'String'>
+    readonly makesSad: FieldRef<"BLPlayer", 'String'>
+    readonly partnerType: FieldRef<"BLPlayer", 'String'>
+    readonly firstLoveAge: FieldRef<"BLPlayer", 'String'>
+    readonly firstConfession: FieldRef<"BLPlayer", 'String'>
+    readonly valentineChoco: FieldRef<"BLPlayer", 'String'>
+    readonly sleepTime: FieldRef<"BLPlayer", 'String'>
+    readonly firstWash: FieldRef<"BLPlayer", 'String'>
+    readonly alwaysBuy: FieldRef<"BLPlayer", 'String'>
+    readonly criedRecently: FieldRef<"BLPlayer", 'String'>
+    readonly disbeliefSanta: FieldRef<"BLPlayer", 'String'>
+    readonly giftSanta: FieldRef<"BLPlayer", 'String'>
+    readonly lastDayPlan: FieldRef<"BLPlayer", 'String'>
+    readonly richPlan: FieldRef<"BLPlayer", 'String'>
+    readonly weekendPlan: FieldRef<"BLPlayer", 'String'>
+    readonly altCareer: FieldRef<"BLPlayer", 'String'>
+    readonly favHistoryChar: FieldRef<"BLPlayer", 'String'>
+    readonly oneObject: FieldRef<"BLPlayer", 'String'>
+    readonly timeMachine: FieldRef<"BLPlayer", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BLPlayer findUnique
+   */
+  export type BLPlayerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter, which BLPlayer to fetch.
+     */
+    where: BLPlayerWhereUniqueInput
+  }
+
+  /**
+   * BLPlayer findUniqueOrThrow
+   */
+  export type BLPlayerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter, which BLPlayer to fetch.
+     */
+    where: BLPlayerWhereUniqueInput
+  }
+
+  /**
+   * BLPlayer findFirst
+   */
+  export type BLPlayerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter, which BLPlayer to fetch.
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BLPlayers to fetch.
+     */
+    orderBy?: BLPlayerOrderByWithRelationInput | BLPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BLPlayers.
+     */
+    cursor?: BLPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BLPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BLPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BLPlayers.
+     */
+    distinct?: BLPlayerScalarFieldEnum | BLPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * BLPlayer findFirstOrThrow
+   */
+  export type BLPlayerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter, which BLPlayer to fetch.
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BLPlayers to fetch.
+     */
+    orderBy?: BLPlayerOrderByWithRelationInput | BLPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BLPlayers.
+     */
+    cursor?: BLPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BLPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BLPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BLPlayers.
+     */
+    distinct?: BLPlayerScalarFieldEnum | BLPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * BLPlayer findMany
+   */
+  export type BLPlayerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter, which BLPlayers to fetch.
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BLPlayers to fetch.
+     */
+    orderBy?: BLPlayerOrderByWithRelationInput | BLPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BLPlayers.
+     */
+    cursor?: BLPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BLPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BLPlayers.
+     */
+    skip?: number
+    distinct?: BLPlayerScalarFieldEnum | BLPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * BLPlayer create
+   */
+  export type BLPlayerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BLPlayer.
+     */
+    data: XOR<BLPlayerCreateInput, BLPlayerUncheckedCreateInput>
+  }
+
+  /**
+   * BLPlayer createMany
+   */
+  export type BLPlayerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BLPlayers.
+     */
+    data: BLPlayerCreateManyInput | BLPlayerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BLPlayer createManyAndReturn
+   */
+  export type BLPlayerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * The data used to create many BLPlayers.
+     */
+    data: BLPlayerCreateManyInput | BLPlayerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BLPlayer update
+   */
+  export type BLPlayerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BLPlayer.
+     */
+    data: XOR<BLPlayerUpdateInput, BLPlayerUncheckedUpdateInput>
+    /**
+     * Choose, which BLPlayer to update.
+     */
+    where: BLPlayerWhereUniqueInput
+  }
+
+  /**
+   * BLPlayer updateMany
+   */
+  export type BLPlayerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BLPlayers.
+     */
+    data: XOR<BLPlayerUpdateManyMutationInput, BLPlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which BLPlayers to update
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * Limit how many BLPlayers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BLPlayer updateManyAndReturn
+   */
+  export type BLPlayerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * The data used to update BLPlayers.
+     */
+    data: XOR<BLPlayerUpdateManyMutationInput, BLPlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which BLPlayers to update
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * Limit how many BLPlayers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BLPlayer upsert
+   */
+  export type BLPlayerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BLPlayer to update in case it exists.
+     */
+    where: BLPlayerWhereUniqueInput
+    /**
+     * In case the BLPlayer found by the `where` argument doesn't exist, create a new BLPlayer with this data.
+     */
+    create: XOR<BLPlayerCreateInput, BLPlayerUncheckedCreateInput>
+    /**
+     * In case the BLPlayer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BLPlayerUpdateInput, BLPlayerUncheckedUpdateInput>
+  }
+
+  /**
+   * BLPlayer delete
+   */
+  export type BLPlayerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+    /**
+     * Filter which BLPlayer to delete.
+     */
+    where: BLPlayerWhereUniqueInput
+  }
+
+  /**
+   * BLPlayer deleteMany
+   */
+  export type BLPlayerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BLPlayers to delete
+     */
+    where?: BLPlayerWhereInput
+    /**
+     * Limit how many BLPlayers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BLPlayer without action
+   */
+  export type BLPlayerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BLPlayer
+     */
+    select?: BLPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BLPlayer
+     */
+    omit?: BLPlayerOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1855,10 +3607,69 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    email: 'email'
+    email: 'email',
+    password: 'password',
+    favBLPlayer: 'favBLPlayer'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const BLPlayerScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    birthDate: 'birthDate',
+    zodiac: 'zodiac',
+    birthPlace: 'birthPlace',
+    family: 'family',
+    height: 'height',
+    shoeSize: 'shoeSize',
+    vision: 'vision',
+    bloodType: 'bloodType',
+    proTeam: 'proTeam',
+    domLeg: 'domLeg',
+    favPlayer: 'favPlayer',
+    startAge: 'startAge',
+    motto: 'motto',
+    nickname: 'nickname',
+    quality: 'quality',
+    defect: 'defect',
+    favFood: 'favFood',
+    hateFood: 'hateFood',
+    riceSideDish: 'riceSideDish',
+    hobbies: 'hobbies',
+    favSeason: 'favSeason',
+    favStrong: 'favStrong',
+    favMovie: 'favMovie',
+    favColor: 'favColor',
+    favFamous: 'favFamous',
+    favAnimal: 'favAnimal',
+    favSubject: 'favSubject',
+    hateSubject: 'hateSubject',
+    freqMagazine: 'freqMagazine',
+    fetish: 'fetish',
+    makesHappy: 'makesHappy',
+    makesSad: 'makesSad',
+    partnerType: 'partnerType',
+    firstLoveAge: 'firstLoveAge',
+    firstConfession: 'firstConfession',
+    valentineChoco: 'valentineChoco',
+    sleepTime: 'sleepTime',
+    firstWash: 'firstWash',
+    alwaysBuy: 'alwaysBuy',
+    criedRecently: 'criedRecently',
+    disbeliefSanta: 'disbeliefSanta',
+    giftSanta: 'giftSanta',
+    lastDayPlan: 'lastDayPlan',
+    richPlan: 'richPlan',
+    weekendPlan: 'weekendPlan',
+    altCareer: 'altCareer',
+    favHistoryChar: 'favHistoryChar',
+    oneObject: 'oneObject',
+    timeMachine: 'timeMachine'
+  };
+
+  export type BLPlayerScalarFieldEnum = (typeof BLPlayerScalarFieldEnum)[keyof typeof BLPlayerScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1877,6 +3688,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -1893,6 +3712,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -1920,12 +3753,16 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    favBLPlayer?: StringNullableFilter<"User"> | string | null
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    favBLPlayer?: SortOrderInput | SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -1935,12 +3772,16 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    favBLPlayer?: StringNullableFilter<"User"> | string | null
   }, "id">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    favBLPlayer?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -1953,48 +3794,726 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    favBLPlayer?: StringNullableWithAggregatesFilter<"User"> | string | null
+  }
+
+  export type BLPlayerWhereInput = {
+    AND?: BLPlayerWhereInput | BLPlayerWhereInput[]
+    OR?: BLPlayerWhereInput[]
+    NOT?: BLPlayerWhereInput | BLPlayerWhereInput[]
+    id?: StringFilter<"BLPlayer"> | string
+    name?: StringFilter<"BLPlayer"> | string
+    birthDate?: StringFilter<"BLPlayer"> | string
+    zodiac?: StringFilter<"BLPlayer"> | string
+    birthPlace?: StringFilter<"BLPlayer"> | string
+    family?: StringFilter<"BLPlayer"> | string
+    height?: FloatFilter<"BLPlayer"> | number
+    shoeSize?: IntFilter<"BLPlayer"> | number
+    vision?: FloatFilter<"BLPlayer"> | number
+    bloodType?: StringFilter<"BLPlayer"> | string
+    proTeam?: StringFilter<"BLPlayer"> | string
+    domLeg?: StringFilter<"BLPlayer"> | string
+    favPlayer?: StringFilter<"BLPlayer"> | string
+    startAge?: StringFilter<"BLPlayer"> | string
+    motto?: StringFilter<"BLPlayer"> | string
+    nickname?: StringFilter<"BLPlayer"> | string
+    quality?: StringFilter<"BLPlayer"> | string
+    defect?: StringFilter<"BLPlayer"> | string
+    favFood?: StringFilter<"BLPlayer"> | string
+    hateFood?: StringFilter<"BLPlayer"> | string
+    riceSideDish?: StringFilter<"BLPlayer"> | string
+    hobbies?: StringFilter<"BLPlayer"> | string
+    favSeason?: StringFilter<"BLPlayer"> | string
+    favStrong?: StringFilter<"BLPlayer"> | string
+    favMovie?: StringFilter<"BLPlayer"> | string
+    favColor?: StringFilter<"BLPlayer"> | string
+    favFamous?: StringFilter<"BLPlayer"> | string
+    favAnimal?: StringFilter<"BLPlayer"> | string
+    favSubject?: StringFilter<"BLPlayer"> | string
+    hateSubject?: StringFilter<"BLPlayer"> | string
+    freqMagazine?: StringFilter<"BLPlayer"> | string
+    fetish?: StringFilter<"BLPlayer"> | string
+    makesHappy?: StringFilter<"BLPlayer"> | string
+    makesSad?: StringFilter<"BLPlayer"> | string
+    partnerType?: StringFilter<"BLPlayer"> | string
+    firstLoveAge?: StringFilter<"BLPlayer"> | string
+    firstConfession?: StringFilter<"BLPlayer"> | string
+    valentineChoco?: StringFilter<"BLPlayer"> | string
+    sleepTime?: StringFilter<"BLPlayer"> | string
+    firstWash?: StringFilter<"BLPlayer"> | string
+    alwaysBuy?: StringFilter<"BLPlayer"> | string
+    criedRecently?: StringFilter<"BLPlayer"> | string
+    disbeliefSanta?: StringFilter<"BLPlayer"> | string
+    giftSanta?: StringFilter<"BLPlayer"> | string
+    lastDayPlan?: StringFilter<"BLPlayer"> | string
+    richPlan?: StringFilter<"BLPlayer"> | string
+    weekendPlan?: StringFilter<"BLPlayer"> | string
+    altCareer?: StringFilter<"BLPlayer"> | string
+    favHistoryChar?: StringFilter<"BLPlayer"> | string
+    oneObject?: StringFilter<"BLPlayer"> | string
+    timeMachine?: StringFilter<"BLPlayer"> | string
+  }
+
+  export type BLPlayerOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    birthDate?: SortOrder
+    zodiac?: SortOrder
+    birthPlace?: SortOrder
+    family?: SortOrder
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+    bloodType?: SortOrder
+    proTeam?: SortOrder
+    domLeg?: SortOrder
+    favPlayer?: SortOrder
+    startAge?: SortOrder
+    motto?: SortOrder
+    nickname?: SortOrder
+    quality?: SortOrder
+    defect?: SortOrder
+    favFood?: SortOrder
+    hateFood?: SortOrder
+    riceSideDish?: SortOrder
+    hobbies?: SortOrder
+    favSeason?: SortOrder
+    favStrong?: SortOrder
+    favMovie?: SortOrder
+    favColor?: SortOrder
+    favFamous?: SortOrder
+    favAnimal?: SortOrder
+    favSubject?: SortOrder
+    hateSubject?: SortOrder
+    freqMagazine?: SortOrder
+    fetish?: SortOrder
+    makesHappy?: SortOrder
+    makesSad?: SortOrder
+    partnerType?: SortOrder
+    firstLoveAge?: SortOrder
+    firstConfession?: SortOrder
+    valentineChoco?: SortOrder
+    sleepTime?: SortOrder
+    firstWash?: SortOrder
+    alwaysBuy?: SortOrder
+    criedRecently?: SortOrder
+    disbeliefSanta?: SortOrder
+    giftSanta?: SortOrder
+    lastDayPlan?: SortOrder
+    richPlan?: SortOrder
+    weekendPlan?: SortOrder
+    altCareer?: SortOrder
+    favHistoryChar?: SortOrder
+    oneObject?: SortOrder
+    timeMachine?: SortOrder
+  }
+
+  export type BLPlayerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BLPlayerWhereInput | BLPlayerWhereInput[]
+    OR?: BLPlayerWhereInput[]
+    NOT?: BLPlayerWhereInput | BLPlayerWhereInput[]
+    name?: StringFilter<"BLPlayer"> | string
+    birthDate?: StringFilter<"BLPlayer"> | string
+    zodiac?: StringFilter<"BLPlayer"> | string
+    birthPlace?: StringFilter<"BLPlayer"> | string
+    family?: StringFilter<"BLPlayer"> | string
+    height?: FloatFilter<"BLPlayer"> | number
+    shoeSize?: IntFilter<"BLPlayer"> | number
+    vision?: FloatFilter<"BLPlayer"> | number
+    bloodType?: StringFilter<"BLPlayer"> | string
+    proTeam?: StringFilter<"BLPlayer"> | string
+    domLeg?: StringFilter<"BLPlayer"> | string
+    favPlayer?: StringFilter<"BLPlayer"> | string
+    startAge?: StringFilter<"BLPlayer"> | string
+    motto?: StringFilter<"BLPlayer"> | string
+    nickname?: StringFilter<"BLPlayer"> | string
+    quality?: StringFilter<"BLPlayer"> | string
+    defect?: StringFilter<"BLPlayer"> | string
+    favFood?: StringFilter<"BLPlayer"> | string
+    hateFood?: StringFilter<"BLPlayer"> | string
+    riceSideDish?: StringFilter<"BLPlayer"> | string
+    hobbies?: StringFilter<"BLPlayer"> | string
+    favSeason?: StringFilter<"BLPlayer"> | string
+    favStrong?: StringFilter<"BLPlayer"> | string
+    favMovie?: StringFilter<"BLPlayer"> | string
+    favColor?: StringFilter<"BLPlayer"> | string
+    favFamous?: StringFilter<"BLPlayer"> | string
+    favAnimal?: StringFilter<"BLPlayer"> | string
+    favSubject?: StringFilter<"BLPlayer"> | string
+    hateSubject?: StringFilter<"BLPlayer"> | string
+    freqMagazine?: StringFilter<"BLPlayer"> | string
+    fetish?: StringFilter<"BLPlayer"> | string
+    makesHappy?: StringFilter<"BLPlayer"> | string
+    makesSad?: StringFilter<"BLPlayer"> | string
+    partnerType?: StringFilter<"BLPlayer"> | string
+    firstLoveAge?: StringFilter<"BLPlayer"> | string
+    firstConfession?: StringFilter<"BLPlayer"> | string
+    valentineChoco?: StringFilter<"BLPlayer"> | string
+    sleepTime?: StringFilter<"BLPlayer"> | string
+    firstWash?: StringFilter<"BLPlayer"> | string
+    alwaysBuy?: StringFilter<"BLPlayer"> | string
+    criedRecently?: StringFilter<"BLPlayer"> | string
+    disbeliefSanta?: StringFilter<"BLPlayer"> | string
+    giftSanta?: StringFilter<"BLPlayer"> | string
+    lastDayPlan?: StringFilter<"BLPlayer"> | string
+    richPlan?: StringFilter<"BLPlayer"> | string
+    weekendPlan?: StringFilter<"BLPlayer"> | string
+    altCareer?: StringFilter<"BLPlayer"> | string
+    favHistoryChar?: StringFilter<"BLPlayer"> | string
+    oneObject?: StringFilter<"BLPlayer"> | string
+    timeMachine?: StringFilter<"BLPlayer"> | string
+  }, "id">
+
+  export type BLPlayerOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    birthDate?: SortOrder
+    zodiac?: SortOrder
+    birthPlace?: SortOrder
+    family?: SortOrder
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+    bloodType?: SortOrder
+    proTeam?: SortOrder
+    domLeg?: SortOrder
+    favPlayer?: SortOrder
+    startAge?: SortOrder
+    motto?: SortOrder
+    nickname?: SortOrder
+    quality?: SortOrder
+    defect?: SortOrder
+    favFood?: SortOrder
+    hateFood?: SortOrder
+    riceSideDish?: SortOrder
+    hobbies?: SortOrder
+    favSeason?: SortOrder
+    favStrong?: SortOrder
+    favMovie?: SortOrder
+    favColor?: SortOrder
+    favFamous?: SortOrder
+    favAnimal?: SortOrder
+    favSubject?: SortOrder
+    hateSubject?: SortOrder
+    freqMagazine?: SortOrder
+    fetish?: SortOrder
+    makesHappy?: SortOrder
+    makesSad?: SortOrder
+    partnerType?: SortOrder
+    firstLoveAge?: SortOrder
+    firstConfession?: SortOrder
+    valentineChoco?: SortOrder
+    sleepTime?: SortOrder
+    firstWash?: SortOrder
+    alwaysBuy?: SortOrder
+    criedRecently?: SortOrder
+    disbeliefSanta?: SortOrder
+    giftSanta?: SortOrder
+    lastDayPlan?: SortOrder
+    richPlan?: SortOrder
+    weekendPlan?: SortOrder
+    altCareer?: SortOrder
+    favHistoryChar?: SortOrder
+    oneObject?: SortOrder
+    timeMachine?: SortOrder
+    _count?: BLPlayerCountOrderByAggregateInput
+    _avg?: BLPlayerAvgOrderByAggregateInput
+    _max?: BLPlayerMaxOrderByAggregateInput
+    _min?: BLPlayerMinOrderByAggregateInput
+    _sum?: BLPlayerSumOrderByAggregateInput
+  }
+
+  export type BLPlayerScalarWhereWithAggregatesInput = {
+    AND?: BLPlayerScalarWhereWithAggregatesInput | BLPlayerScalarWhereWithAggregatesInput[]
+    OR?: BLPlayerScalarWhereWithAggregatesInput[]
+    NOT?: BLPlayerScalarWhereWithAggregatesInput | BLPlayerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BLPlayer"> | string
+    name?: StringWithAggregatesFilter<"BLPlayer"> | string
+    birthDate?: StringWithAggregatesFilter<"BLPlayer"> | string
+    zodiac?: StringWithAggregatesFilter<"BLPlayer"> | string
+    birthPlace?: StringWithAggregatesFilter<"BLPlayer"> | string
+    family?: StringWithAggregatesFilter<"BLPlayer"> | string
+    height?: FloatWithAggregatesFilter<"BLPlayer"> | number
+    shoeSize?: IntWithAggregatesFilter<"BLPlayer"> | number
+    vision?: FloatWithAggregatesFilter<"BLPlayer"> | number
+    bloodType?: StringWithAggregatesFilter<"BLPlayer"> | string
+    proTeam?: StringWithAggregatesFilter<"BLPlayer"> | string
+    domLeg?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favPlayer?: StringWithAggregatesFilter<"BLPlayer"> | string
+    startAge?: StringWithAggregatesFilter<"BLPlayer"> | string
+    motto?: StringWithAggregatesFilter<"BLPlayer"> | string
+    nickname?: StringWithAggregatesFilter<"BLPlayer"> | string
+    quality?: StringWithAggregatesFilter<"BLPlayer"> | string
+    defect?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favFood?: StringWithAggregatesFilter<"BLPlayer"> | string
+    hateFood?: StringWithAggregatesFilter<"BLPlayer"> | string
+    riceSideDish?: StringWithAggregatesFilter<"BLPlayer"> | string
+    hobbies?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favSeason?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favStrong?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favMovie?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favColor?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favFamous?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favAnimal?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favSubject?: StringWithAggregatesFilter<"BLPlayer"> | string
+    hateSubject?: StringWithAggregatesFilter<"BLPlayer"> | string
+    freqMagazine?: StringWithAggregatesFilter<"BLPlayer"> | string
+    fetish?: StringWithAggregatesFilter<"BLPlayer"> | string
+    makesHappy?: StringWithAggregatesFilter<"BLPlayer"> | string
+    makesSad?: StringWithAggregatesFilter<"BLPlayer"> | string
+    partnerType?: StringWithAggregatesFilter<"BLPlayer"> | string
+    firstLoveAge?: StringWithAggregatesFilter<"BLPlayer"> | string
+    firstConfession?: StringWithAggregatesFilter<"BLPlayer"> | string
+    valentineChoco?: StringWithAggregatesFilter<"BLPlayer"> | string
+    sleepTime?: StringWithAggregatesFilter<"BLPlayer"> | string
+    firstWash?: StringWithAggregatesFilter<"BLPlayer"> | string
+    alwaysBuy?: StringWithAggregatesFilter<"BLPlayer"> | string
+    criedRecently?: StringWithAggregatesFilter<"BLPlayer"> | string
+    disbeliefSanta?: StringWithAggregatesFilter<"BLPlayer"> | string
+    giftSanta?: StringWithAggregatesFilter<"BLPlayer"> | string
+    lastDayPlan?: StringWithAggregatesFilter<"BLPlayer"> | string
+    richPlan?: StringWithAggregatesFilter<"BLPlayer"> | string
+    weekendPlan?: StringWithAggregatesFilter<"BLPlayer"> | string
+    altCareer?: StringWithAggregatesFilter<"BLPlayer"> | string
+    favHistoryChar?: StringWithAggregatesFilter<"BLPlayer"> | string
+    oneObject?: StringWithAggregatesFilter<"BLPlayer"> | string
+    timeMachine?: StringWithAggregatesFilter<"BLPlayer"> | string
   }
 
   export type UserCreateInput = {
     id?: string
     name: string
     email: string
+    password: string
+    favBLPlayer?: string | null
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     name: string
     email: string
+    password: string
+    favBLPlayer?: string | null
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    favBLPlayer?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    favBLPlayer?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyInput = {
     id?: string
     name: string
     email: string
+    password: string
+    favBLPlayer?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    favBLPlayer?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    favBLPlayer?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BLPlayerCreateInput = {
+    id?: string
+    name: string
+    birthDate: string
+    zodiac: string
+    birthPlace: string
+    family: string
+    height: number
+    shoeSize: number
+    vision: number
+    bloodType: string
+    proTeam: string
+    domLeg: string
+    favPlayer: string
+    startAge: string
+    motto: string
+    nickname: string
+    quality: string
+    defect: string
+    favFood: string
+    hateFood: string
+    riceSideDish: string
+    hobbies: string
+    favSeason: string
+    favStrong: string
+    favMovie: string
+    favColor: string
+    favFamous: string
+    favAnimal: string
+    favSubject: string
+    hateSubject: string
+    freqMagazine: string
+    fetish: string
+    makesHappy: string
+    makesSad: string
+    partnerType: string
+    firstLoveAge: string
+    firstConfession: string
+    valentineChoco: string
+    sleepTime: string
+    firstWash: string
+    alwaysBuy: string
+    criedRecently: string
+    disbeliefSanta: string
+    giftSanta: string
+    lastDayPlan: string
+    richPlan: string
+    weekendPlan: string
+    altCareer: string
+    favHistoryChar: string
+    oneObject: string
+    timeMachine: string
+  }
+
+  export type BLPlayerUncheckedCreateInput = {
+    id?: string
+    name: string
+    birthDate: string
+    zodiac: string
+    birthPlace: string
+    family: string
+    height: number
+    shoeSize: number
+    vision: number
+    bloodType: string
+    proTeam: string
+    domLeg: string
+    favPlayer: string
+    startAge: string
+    motto: string
+    nickname: string
+    quality: string
+    defect: string
+    favFood: string
+    hateFood: string
+    riceSideDish: string
+    hobbies: string
+    favSeason: string
+    favStrong: string
+    favMovie: string
+    favColor: string
+    favFamous: string
+    favAnimal: string
+    favSubject: string
+    hateSubject: string
+    freqMagazine: string
+    fetish: string
+    makesHappy: string
+    makesSad: string
+    partnerType: string
+    firstLoveAge: string
+    firstConfession: string
+    valentineChoco: string
+    sleepTime: string
+    firstWash: string
+    alwaysBuy: string
+    criedRecently: string
+    disbeliefSanta: string
+    giftSanta: string
+    lastDayPlan: string
+    richPlan: string
+    weekendPlan: string
+    altCareer: string
+    favHistoryChar: string
+    oneObject: string
+    timeMachine: string
+  }
+
+  export type BLPlayerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    birthDate?: StringFieldUpdateOperationsInput | string
+    zodiac?: StringFieldUpdateOperationsInput | string
+    birthPlace?: StringFieldUpdateOperationsInput | string
+    family?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    shoeSize?: IntFieldUpdateOperationsInput | number
+    vision?: FloatFieldUpdateOperationsInput | number
+    bloodType?: StringFieldUpdateOperationsInput | string
+    proTeam?: StringFieldUpdateOperationsInput | string
+    domLeg?: StringFieldUpdateOperationsInput | string
+    favPlayer?: StringFieldUpdateOperationsInput | string
+    startAge?: StringFieldUpdateOperationsInput | string
+    motto?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
+    defect?: StringFieldUpdateOperationsInput | string
+    favFood?: StringFieldUpdateOperationsInput | string
+    hateFood?: StringFieldUpdateOperationsInput | string
+    riceSideDish?: StringFieldUpdateOperationsInput | string
+    hobbies?: StringFieldUpdateOperationsInput | string
+    favSeason?: StringFieldUpdateOperationsInput | string
+    favStrong?: StringFieldUpdateOperationsInput | string
+    favMovie?: StringFieldUpdateOperationsInput | string
+    favColor?: StringFieldUpdateOperationsInput | string
+    favFamous?: StringFieldUpdateOperationsInput | string
+    favAnimal?: StringFieldUpdateOperationsInput | string
+    favSubject?: StringFieldUpdateOperationsInput | string
+    hateSubject?: StringFieldUpdateOperationsInput | string
+    freqMagazine?: StringFieldUpdateOperationsInput | string
+    fetish?: StringFieldUpdateOperationsInput | string
+    makesHappy?: StringFieldUpdateOperationsInput | string
+    makesSad?: StringFieldUpdateOperationsInput | string
+    partnerType?: StringFieldUpdateOperationsInput | string
+    firstLoveAge?: StringFieldUpdateOperationsInput | string
+    firstConfession?: StringFieldUpdateOperationsInput | string
+    valentineChoco?: StringFieldUpdateOperationsInput | string
+    sleepTime?: StringFieldUpdateOperationsInput | string
+    firstWash?: StringFieldUpdateOperationsInput | string
+    alwaysBuy?: StringFieldUpdateOperationsInput | string
+    criedRecently?: StringFieldUpdateOperationsInput | string
+    disbeliefSanta?: StringFieldUpdateOperationsInput | string
+    giftSanta?: StringFieldUpdateOperationsInput | string
+    lastDayPlan?: StringFieldUpdateOperationsInput | string
+    richPlan?: StringFieldUpdateOperationsInput | string
+    weekendPlan?: StringFieldUpdateOperationsInput | string
+    altCareer?: StringFieldUpdateOperationsInput | string
+    favHistoryChar?: StringFieldUpdateOperationsInput | string
+    oneObject?: StringFieldUpdateOperationsInput | string
+    timeMachine?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BLPlayerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    birthDate?: StringFieldUpdateOperationsInput | string
+    zodiac?: StringFieldUpdateOperationsInput | string
+    birthPlace?: StringFieldUpdateOperationsInput | string
+    family?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    shoeSize?: IntFieldUpdateOperationsInput | number
+    vision?: FloatFieldUpdateOperationsInput | number
+    bloodType?: StringFieldUpdateOperationsInput | string
+    proTeam?: StringFieldUpdateOperationsInput | string
+    domLeg?: StringFieldUpdateOperationsInput | string
+    favPlayer?: StringFieldUpdateOperationsInput | string
+    startAge?: StringFieldUpdateOperationsInput | string
+    motto?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
+    defect?: StringFieldUpdateOperationsInput | string
+    favFood?: StringFieldUpdateOperationsInput | string
+    hateFood?: StringFieldUpdateOperationsInput | string
+    riceSideDish?: StringFieldUpdateOperationsInput | string
+    hobbies?: StringFieldUpdateOperationsInput | string
+    favSeason?: StringFieldUpdateOperationsInput | string
+    favStrong?: StringFieldUpdateOperationsInput | string
+    favMovie?: StringFieldUpdateOperationsInput | string
+    favColor?: StringFieldUpdateOperationsInput | string
+    favFamous?: StringFieldUpdateOperationsInput | string
+    favAnimal?: StringFieldUpdateOperationsInput | string
+    favSubject?: StringFieldUpdateOperationsInput | string
+    hateSubject?: StringFieldUpdateOperationsInput | string
+    freqMagazine?: StringFieldUpdateOperationsInput | string
+    fetish?: StringFieldUpdateOperationsInput | string
+    makesHappy?: StringFieldUpdateOperationsInput | string
+    makesSad?: StringFieldUpdateOperationsInput | string
+    partnerType?: StringFieldUpdateOperationsInput | string
+    firstLoveAge?: StringFieldUpdateOperationsInput | string
+    firstConfession?: StringFieldUpdateOperationsInput | string
+    valentineChoco?: StringFieldUpdateOperationsInput | string
+    sleepTime?: StringFieldUpdateOperationsInput | string
+    firstWash?: StringFieldUpdateOperationsInput | string
+    alwaysBuy?: StringFieldUpdateOperationsInput | string
+    criedRecently?: StringFieldUpdateOperationsInput | string
+    disbeliefSanta?: StringFieldUpdateOperationsInput | string
+    giftSanta?: StringFieldUpdateOperationsInput | string
+    lastDayPlan?: StringFieldUpdateOperationsInput | string
+    richPlan?: StringFieldUpdateOperationsInput | string
+    weekendPlan?: StringFieldUpdateOperationsInput | string
+    altCareer?: StringFieldUpdateOperationsInput | string
+    favHistoryChar?: StringFieldUpdateOperationsInput | string
+    oneObject?: StringFieldUpdateOperationsInput | string
+    timeMachine?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BLPlayerCreateManyInput = {
+    id?: string
+    name: string
+    birthDate: string
+    zodiac: string
+    birthPlace: string
+    family: string
+    height: number
+    shoeSize: number
+    vision: number
+    bloodType: string
+    proTeam: string
+    domLeg: string
+    favPlayer: string
+    startAge: string
+    motto: string
+    nickname: string
+    quality: string
+    defect: string
+    favFood: string
+    hateFood: string
+    riceSideDish: string
+    hobbies: string
+    favSeason: string
+    favStrong: string
+    favMovie: string
+    favColor: string
+    favFamous: string
+    favAnimal: string
+    favSubject: string
+    hateSubject: string
+    freqMagazine: string
+    fetish: string
+    makesHappy: string
+    makesSad: string
+    partnerType: string
+    firstLoveAge: string
+    firstConfession: string
+    valentineChoco: string
+    sleepTime: string
+    firstWash: string
+    alwaysBuy: string
+    criedRecently: string
+    disbeliefSanta: string
+    giftSanta: string
+    lastDayPlan: string
+    richPlan: string
+    weekendPlan: string
+    altCareer: string
+    favHistoryChar: string
+    oneObject: string
+    timeMachine: string
+  }
+
+  export type BLPlayerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    birthDate?: StringFieldUpdateOperationsInput | string
+    zodiac?: StringFieldUpdateOperationsInput | string
+    birthPlace?: StringFieldUpdateOperationsInput | string
+    family?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    shoeSize?: IntFieldUpdateOperationsInput | number
+    vision?: FloatFieldUpdateOperationsInput | number
+    bloodType?: StringFieldUpdateOperationsInput | string
+    proTeam?: StringFieldUpdateOperationsInput | string
+    domLeg?: StringFieldUpdateOperationsInput | string
+    favPlayer?: StringFieldUpdateOperationsInput | string
+    startAge?: StringFieldUpdateOperationsInput | string
+    motto?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
+    defect?: StringFieldUpdateOperationsInput | string
+    favFood?: StringFieldUpdateOperationsInput | string
+    hateFood?: StringFieldUpdateOperationsInput | string
+    riceSideDish?: StringFieldUpdateOperationsInput | string
+    hobbies?: StringFieldUpdateOperationsInput | string
+    favSeason?: StringFieldUpdateOperationsInput | string
+    favStrong?: StringFieldUpdateOperationsInput | string
+    favMovie?: StringFieldUpdateOperationsInput | string
+    favColor?: StringFieldUpdateOperationsInput | string
+    favFamous?: StringFieldUpdateOperationsInput | string
+    favAnimal?: StringFieldUpdateOperationsInput | string
+    favSubject?: StringFieldUpdateOperationsInput | string
+    hateSubject?: StringFieldUpdateOperationsInput | string
+    freqMagazine?: StringFieldUpdateOperationsInput | string
+    fetish?: StringFieldUpdateOperationsInput | string
+    makesHappy?: StringFieldUpdateOperationsInput | string
+    makesSad?: StringFieldUpdateOperationsInput | string
+    partnerType?: StringFieldUpdateOperationsInput | string
+    firstLoveAge?: StringFieldUpdateOperationsInput | string
+    firstConfession?: StringFieldUpdateOperationsInput | string
+    valentineChoco?: StringFieldUpdateOperationsInput | string
+    sleepTime?: StringFieldUpdateOperationsInput | string
+    firstWash?: StringFieldUpdateOperationsInput | string
+    alwaysBuy?: StringFieldUpdateOperationsInput | string
+    criedRecently?: StringFieldUpdateOperationsInput | string
+    disbeliefSanta?: StringFieldUpdateOperationsInput | string
+    giftSanta?: StringFieldUpdateOperationsInput | string
+    lastDayPlan?: StringFieldUpdateOperationsInput | string
+    richPlan?: StringFieldUpdateOperationsInput | string
+    weekendPlan?: StringFieldUpdateOperationsInput | string
+    altCareer?: StringFieldUpdateOperationsInput | string
+    favHistoryChar?: StringFieldUpdateOperationsInput | string
+    oneObject?: StringFieldUpdateOperationsInput | string
+    timeMachine?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BLPlayerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    birthDate?: StringFieldUpdateOperationsInput | string
+    zodiac?: StringFieldUpdateOperationsInput | string
+    birthPlace?: StringFieldUpdateOperationsInput | string
+    family?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    shoeSize?: IntFieldUpdateOperationsInput | number
+    vision?: FloatFieldUpdateOperationsInput | number
+    bloodType?: StringFieldUpdateOperationsInput | string
+    proTeam?: StringFieldUpdateOperationsInput | string
+    domLeg?: StringFieldUpdateOperationsInput | string
+    favPlayer?: StringFieldUpdateOperationsInput | string
+    startAge?: StringFieldUpdateOperationsInput | string
+    motto?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
+    defect?: StringFieldUpdateOperationsInput | string
+    favFood?: StringFieldUpdateOperationsInput | string
+    hateFood?: StringFieldUpdateOperationsInput | string
+    riceSideDish?: StringFieldUpdateOperationsInput | string
+    hobbies?: StringFieldUpdateOperationsInput | string
+    favSeason?: StringFieldUpdateOperationsInput | string
+    favStrong?: StringFieldUpdateOperationsInput | string
+    favMovie?: StringFieldUpdateOperationsInput | string
+    favColor?: StringFieldUpdateOperationsInput | string
+    favFamous?: StringFieldUpdateOperationsInput | string
+    favAnimal?: StringFieldUpdateOperationsInput | string
+    favSubject?: StringFieldUpdateOperationsInput | string
+    hateSubject?: StringFieldUpdateOperationsInput | string
+    freqMagazine?: StringFieldUpdateOperationsInput | string
+    fetish?: StringFieldUpdateOperationsInput | string
+    makesHappy?: StringFieldUpdateOperationsInput | string
+    makesSad?: StringFieldUpdateOperationsInput | string
+    partnerType?: StringFieldUpdateOperationsInput | string
+    firstLoveAge?: StringFieldUpdateOperationsInput | string
+    firstConfession?: StringFieldUpdateOperationsInput | string
+    valentineChoco?: StringFieldUpdateOperationsInput | string
+    sleepTime?: StringFieldUpdateOperationsInput | string
+    firstWash?: StringFieldUpdateOperationsInput | string
+    alwaysBuy?: StringFieldUpdateOperationsInput | string
+    criedRecently?: StringFieldUpdateOperationsInput | string
+    disbeliefSanta?: StringFieldUpdateOperationsInput | string
+    giftSanta?: StringFieldUpdateOperationsInput | string
+    lastDayPlan?: StringFieldUpdateOperationsInput | string
+    richPlan?: StringFieldUpdateOperationsInput | string
+    weekendPlan?: StringFieldUpdateOperationsInput | string
+    altCareer?: StringFieldUpdateOperationsInput | string
+    favHistoryChar?: StringFieldUpdateOperationsInput | string
+    oneObject?: StringFieldUpdateOperationsInput | string
+    timeMachine?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2012,22 +4531,48 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    favBLPlayer?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    favBLPlayer?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    favBLPlayer?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2048,8 +4593,274 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type BLPlayerCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    birthDate?: SortOrder
+    zodiac?: SortOrder
+    birthPlace?: SortOrder
+    family?: SortOrder
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+    bloodType?: SortOrder
+    proTeam?: SortOrder
+    domLeg?: SortOrder
+    favPlayer?: SortOrder
+    startAge?: SortOrder
+    motto?: SortOrder
+    nickname?: SortOrder
+    quality?: SortOrder
+    defect?: SortOrder
+    favFood?: SortOrder
+    hateFood?: SortOrder
+    riceSideDish?: SortOrder
+    hobbies?: SortOrder
+    favSeason?: SortOrder
+    favStrong?: SortOrder
+    favMovie?: SortOrder
+    favColor?: SortOrder
+    favFamous?: SortOrder
+    favAnimal?: SortOrder
+    favSubject?: SortOrder
+    hateSubject?: SortOrder
+    freqMagazine?: SortOrder
+    fetish?: SortOrder
+    makesHappy?: SortOrder
+    makesSad?: SortOrder
+    partnerType?: SortOrder
+    firstLoveAge?: SortOrder
+    firstConfession?: SortOrder
+    valentineChoco?: SortOrder
+    sleepTime?: SortOrder
+    firstWash?: SortOrder
+    alwaysBuy?: SortOrder
+    criedRecently?: SortOrder
+    disbeliefSanta?: SortOrder
+    giftSanta?: SortOrder
+    lastDayPlan?: SortOrder
+    richPlan?: SortOrder
+    weekendPlan?: SortOrder
+    altCareer?: SortOrder
+    favHistoryChar?: SortOrder
+    oneObject?: SortOrder
+    timeMachine?: SortOrder
+  }
+
+  export type BLPlayerAvgOrderByAggregateInput = {
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+  }
+
+  export type BLPlayerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    birthDate?: SortOrder
+    zodiac?: SortOrder
+    birthPlace?: SortOrder
+    family?: SortOrder
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+    bloodType?: SortOrder
+    proTeam?: SortOrder
+    domLeg?: SortOrder
+    favPlayer?: SortOrder
+    startAge?: SortOrder
+    motto?: SortOrder
+    nickname?: SortOrder
+    quality?: SortOrder
+    defect?: SortOrder
+    favFood?: SortOrder
+    hateFood?: SortOrder
+    riceSideDish?: SortOrder
+    hobbies?: SortOrder
+    favSeason?: SortOrder
+    favStrong?: SortOrder
+    favMovie?: SortOrder
+    favColor?: SortOrder
+    favFamous?: SortOrder
+    favAnimal?: SortOrder
+    favSubject?: SortOrder
+    hateSubject?: SortOrder
+    freqMagazine?: SortOrder
+    fetish?: SortOrder
+    makesHappy?: SortOrder
+    makesSad?: SortOrder
+    partnerType?: SortOrder
+    firstLoveAge?: SortOrder
+    firstConfession?: SortOrder
+    valentineChoco?: SortOrder
+    sleepTime?: SortOrder
+    firstWash?: SortOrder
+    alwaysBuy?: SortOrder
+    criedRecently?: SortOrder
+    disbeliefSanta?: SortOrder
+    giftSanta?: SortOrder
+    lastDayPlan?: SortOrder
+    richPlan?: SortOrder
+    weekendPlan?: SortOrder
+    altCareer?: SortOrder
+    favHistoryChar?: SortOrder
+    oneObject?: SortOrder
+    timeMachine?: SortOrder
+  }
+
+  export type BLPlayerMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    birthDate?: SortOrder
+    zodiac?: SortOrder
+    birthPlace?: SortOrder
+    family?: SortOrder
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+    bloodType?: SortOrder
+    proTeam?: SortOrder
+    domLeg?: SortOrder
+    favPlayer?: SortOrder
+    startAge?: SortOrder
+    motto?: SortOrder
+    nickname?: SortOrder
+    quality?: SortOrder
+    defect?: SortOrder
+    favFood?: SortOrder
+    hateFood?: SortOrder
+    riceSideDish?: SortOrder
+    hobbies?: SortOrder
+    favSeason?: SortOrder
+    favStrong?: SortOrder
+    favMovie?: SortOrder
+    favColor?: SortOrder
+    favFamous?: SortOrder
+    favAnimal?: SortOrder
+    favSubject?: SortOrder
+    hateSubject?: SortOrder
+    freqMagazine?: SortOrder
+    fetish?: SortOrder
+    makesHappy?: SortOrder
+    makesSad?: SortOrder
+    partnerType?: SortOrder
+    firstLoveAge?: SortOrder
+    firstConfession?: SortOrder
+    valentineChoco?: SortOrder
+    sleepTime?: SortOrder
+    firstWash?: SortOrder
+    alwaysBuy?: SortOrder
+    criedRecently?: SortOrder
+    disbeliefSanta?: SortOrder
+    giftSanta?: SortOrder
+    lastDayPlan?: SortOrder
+    richPlan?: SortOrder
+    weekendPlan?: SortOrder
+    altCareer?: SortOrder
+    favHistoryChar?: SortOrder
+    oneObject?: SortOrder
+    timeMachine?: SortOrder
+  }
+
+  export type BLPlayerSumOrderByAggregateInput = {
+    height?: SortOrder
+    shoeSize?: SortOrder
+    vision?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2064,6 +4875,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2092,6 +4917,77 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
 
