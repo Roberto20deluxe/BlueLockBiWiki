@@ -20,3 +20,10 @@ Wiki for all Blue Lock Egoist Bible profiles with a personality quiz to determin
 </ul>
 
 
+<h2>How to run local backend with Prisma ORM</h2>
+1. Create a file named .env on the most external area of the project
+2. Inside the created file, put the following text:
+
+    ```javascript
+        DATABASE_URL = "postgresql://postgres:password@localhost:5432/bluelock"
+    ```

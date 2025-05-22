@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String @id @default(uuid())
+  name        String
+  email       String
+  password    String
+  favBLPlayer String?
+}
+
+model BLPlayer {
+  id              String  @id @default(uuid())
+  name            String
+  birthDate       String
+  zodiac          String
+  birthPlace      String
+  family          String
+  height          Float
+  shoeSize        Int
+  vision          Float
+  bloodType       String
+  proTeam         String
+  domLeg          String
+  favPlayer       String
+  startAge        String
+  motto           String
+  nickname        String
+  quality         String
+  defect          String
+  favFood         String
+  hateFood        String
+  riceSideDish    String
+  hobbies         String
+  favSeason       String
+  favStrong       String
+  favMovie        String
+  favColor        String
+  favFamous       String
+  favAnimal       String
+  favSubject      String
+  hateSubject     String
+  freqMagazine    String
+  fetish          String
+  makesHappy      String
+  makesSad        String
+  partnerType     String
+  firstLoveAge    String
+  firstConfession String
+  valentineChoco  String
+  sleepTime       String
+  firstWash       String
+  alwaysBuy       String
+  criedRecently   String
+  disbeliefSanta  String
+  giftSanta       String
+  lastDayPlan     String
+  richPlan        String
+  weekendPlan     String
+  altCareer       String
+  favHistoryChar  String
+  oneObject       String
+  timeMachine     String
+}
