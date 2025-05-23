@@ -186,7 +186,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Users\\BRENO\\Desktop\\BlueLockBiWiki\\generated\\prisma",
+      "value": "D:\\Users\\BRENO\\Desktop\\ajeitando\\BlueLockBiWiki\\database\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -200,7 +200,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Users\\BRENO\\Desktop\\BlueLockBiWiki\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\Users\\BRENO\\Desktop\\ajeitando\\BlueLockBiWiki\\database\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
