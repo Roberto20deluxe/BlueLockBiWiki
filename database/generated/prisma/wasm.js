@@ -128,58 +128,34 @@ exports.Prisma.UserScalarFieldEnum = {
   favBLPlayer: 'favBLPlayer'
 };
 
-exports.Prisma.BLPlayerScalarFieldEnum = {
+exports.Prisma.BLPLayerScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  birthDate: 'birthDate',
-  zodiac: 'zodiac',
-  birthPlace: 'birthPlace',
-  family: 'family',
-  height: 'height',
-  shoeSize: 'shoeSize',
-  vision: 'vision',
-  bloodType: 'bloodType',
-  proTeam: 'proTeam',
-  domLeg: 'domLeg',
-  favPlayer: 'favPlayer',
-  startAge: 'startAge',
-  motto: 'motto',
+  age: 'age',
   nickname: 'nickname',
-  quality: 'quality',
-  defect: 'defect',
-  favFood: 'favFood',
-  hateFood: 'hateFood',
-  riceSideDish: 'riceSideDish',
-  hobbies: 'hobbies',
-  favSeason: 'favSeason',
-  favStrong: 'favStrong',
-  favMovie: 'favMovie',
-  favColor: 'favColor',
-  favFamous: 'favFamous',
-  favAnimal: 'favAnimal',
-  favSubject: 'favSubject',
-  hateSubject: 'hateSubject',
-  freqMagazine: 'freqMagazine',
-  fetish: 'fetish',
-  makesHappy: 'makesHappy',
-  makesSad: 'makesSad',
-  partnerType: 'partnerType',
-  firstLoveAge: 'firstLoveAge',
-  firstConfession: 'firstConfession',
-  valentineChoco: 'valentineChoco',
-  sleepTime: 'sleepTime',
-  firstWash: 'firstWash',
-  alwaysBuy: 'alwaysBuy',
-  criedRecently: 'criedRecently',
-  disbeliefSanta: 'disbeliefSanta',
-  giftSanta: 'giftSanta',
-  lastDayPlan: 'lastDayPlan',
-  richPlan: 'richPlan',
-  weekendPlan: 'weekendPlan',
-  altCareer: 'altCareer',
-  favHistoryChar: 'favHistoryChar',
-  oneObject: 'oneObject',
-  timeMachine: 'timeMachine'
+  ageComment: 'ageComment',
+  birthDate: 'birthDate',
+  birthPlace: 'birthPlace',
+  height: 'height',
+  domLeg: 'domLeg',
+  shoeSize: 'shoeSize',
+  bloodType: 'bloodType',
+  vision: 'vision',
+  zodiac: 'zodiac'
+};
+
+exports.Prisma.QuestionScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  orderNumber: 'orderNumber'
+};
+
+exports.Prisma.ResponseScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  questionId: 'questionId',
+  answer: 'answer',
+  comment: 'comment'
 };
 
 exports.Prisma.SortOrder = {
@@ -200,7 +176,9 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  BLPlayer: 'BLPlayer'
+  BLPLayer: 'BLPLayer',
+  Question: 'Question',
+  Response: 'Response'
 };
 
 /**
