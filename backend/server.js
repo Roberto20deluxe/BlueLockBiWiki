@@ -15,17 +15,6 @@ app.get('/users', async (req, res) => {
     }
 })
 
-// Buscar usuário por ID
-app.get('/users/:id', async (req, res) => {
-    try {
-        const user = await prisma.user.findUnique({ where: { id: req.params.id } })
-        if (!user) return res.status(404).json({ error: 'Usuário não encontrado' })
-        res.json(user)
-    } catch (err) {
-        res.status(500).json({ error: 'Erro ao buscar usuário' })
-    }
-})
-
 app.post('/users', async (req, res) => {
     try {
         const { name, email, password, favBLPlayer } = req.body
