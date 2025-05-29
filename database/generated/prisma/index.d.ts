@@ -2238,6 +2238,7 @@ export namespace Prisma {
     bloodType: string | null
     vision: number | null
     zodiac: string | null
+    imageUrl: string | null
   }
 
   export type BLPLayerMaxAggregateOutputType = {
@@ -2254,6 +2255,7 @@ export namespace Prisma {
     bloodType: string | null
     vision: number | null
     zodiac: string | null
+    imageUrl: string | null
   }
 
   export type BLPLayerCountAggregateOutputType = {
@@ -2270,6 +2272,7 @@ export namespace Prisma {
     bloodType: number
     vision: number
     zodiac: number
+    imageUrl: number
     _all: number
   }
 
@@ -2302,6 +2305,7 @@ export namespace Prisma {
     bloodType?: true
     vision?: true
     zodiac?: true
+    imageUrl?: true
   }
 
   export type BLPLayerMaxAggregateInputType = {
@@ -2318,6 +2322,7 @@ export namespace Prisma {
     bloodType?: true
     vision?: true
     zodiac?: true
+    imageUrl?: true
   }
 
   export type BLPLayerCountAggregateInputType = {
@@ -2334,6 +2339,7 @@ export namespace Prisma {
     bloodType?: true
     vision?: true
     zodiac?: true
+    imageUrl?: true
     _all?: true
   }
 
@@ -2437,6 +2443,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
     _count: BLPLayerCountAggregateOutputType | null
     _avg: BLPLayerAvgAggregateOutputType | null
     _sum: BLPLayerSumAggregateOutputType | null
@@ -2472,6 +2479,7 @@ export namespace Prisma {
     bloodType?: boolean
     vision?: boolean
     zodiac?: boolean
+    imageUrl?: boolean
     responses?: boolean | BLPLayer$responsesArgs<ExtArgs>
     _count?: boolean | BLPLayerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bLPLayer"]>
@@ -2490,6 +2498,7 @@ export namespace Prisma {
     bloodType?: boolean
     vision?: boolean
     zodiac?: boolean
+    imageUrl?: boolean
   }, ExtArgs["result"]["bLPLayer"]>
 
   export type BLPLayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2506,6 +2515,7 @@ export namespace Prisma {
     bloodType?: boolean
     vision?: boolean
     zodiac?: boolean
+    imageUrl?: boolean
   }, ExtArgs["result"]["bLPLayer"]>
 
   export type BLPLayerSelectScalar = {
@@ -2522,9 +2532,10 @@ export namespace Prisma {
     bloodType?: boolean
     vision?: boolean
     zodiac?: boolean
+    imageUrl?: boolean
   }
 
-  export type BLPLayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "age" | "nickname" | "ageComment" | "birthDate" | "birthPlace" | "height" | "domLeg" | "shoeSize" | "bloodType" | "vision" | "zodiac", ExtArgs["result"]["bLPLayer"]>
+  export type BLPLayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "age" | "nickname" | "ageComment" | "birthDate" | "birthPlace" | "height" | "domLeg" | "shoeSize" | "bloodType" | "vision" | "zodiac" | "imageUrl", ExtArgs["result"]["bLPLayer"]>
   export type BLPLayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     responses?: boolean | BLPLayer$responsesArgs<ExtArgs>
     _count?: boolean | BLPLayerCountOutputTypeDefaultArgs<ExtArgs>
@@ -2551,6 +2562,7 @@ export namespace Prisma {
       bloodType: string
       vision: number
       zodiac: string
+      imageUrl: string
     }, ExtArgs["result"]["bLPLayer"]>
     composites: {}
   }
@@ -2988,6 +3000,7 @@ export namespace Prisma {
     readonly bloodType: FieldRef<"BLPLayer", 'String'>
     readonly vision: FieldRef<"BLPLayer", 'Float'>
     readonly zodiac: FieldRef<"BLPLayer", 'String'>
+    readonly imageUrl: FieldRef<"BLPLayer", 'String'>
   }
     
 
@@ -5600,7 +5613,8 @@ export namespace Prisma {
     shoeSize: 'shoeSize',
     bloodType: 'bloodType',
     vision: 'vision',
-    zodiac: 'zodiac'
+    zodiac: 'zodiac',
+    imageUrl: 'imageUrl'
   };
 
   export type BLPLayerScalarFieldEnum = (typeof BLPLayerScalarFieldEnum)[keyof typeof BLPLayerScalarFieldEnum]
@@ -5783,6 +5797,7 @@ export namespace Prisma {
     bloodType?: StringFilter<"BLPLayer"> | string
     vision?: FloatFilter<"BLPLayer"> | number
     zodiac?: StringFilter<"BLPLayer"> | string
+    imageUrl?: StringFilter<"BLPLayer"> | string
     responses?: ResponseListRelationFilter
   }
 
@@ -5800,6 +5815,7 @@ export namespace Prisma {
     bloodType?: SortOrder
     vision?: SortOrder
     zodiac?: SortOrder
+    imageUrl?: SortOrder
     responses?: ResponseOrderByRelationAggregateInput
   }
 
@@ -5820,6 +5836,7 @@ export namespace Prisma {
     bloodType?: StringFilter<"BLPLayer"> | string
     vision?: FloatFilter<"BLPLayer"> | number
     zodiac?: StringFilter<"BLPLayer"> | string
+    imageUrl?: StringFilter<"BLPLayer"> | string
     responses?: ResponseListRelationFilter
   }, "id">
 
@@ -5837,6 +5854,7 @@ export namespace Prisma {
     bloodType?: SortOrder
     vision?: SortOrder
     zodiac?: SortOrder
+    imageUrl?: SortOrder
     _count?: BLPLayerCountOrderByAggregateInput
     _avg?: BLPLayerAvgOrderByAggregateInput
     _max?: BLPLayerMaxOrderByAggregateInput
@@ -5861,6 +5879,7 @@ export namespace Prisma {
     bloodType?: StringWithAggregatesFilter<"BLPLayer"> | string
     vision?: FloatWithAggregatesFilter<"BLPLayer"> | number
     zodiac?: StringWithAggregatesFilter<"BLPLayer"> | string
+    imageUrl?: StringWithAggregatesFilter<"BLPLayer"> | string
   }
 
   export type QuestionWhereInput = {
@@ -6039,6 +6058,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
     responses?: ResponseCreateNestedManyWithoutPlayerInput
   }
 
@@ -6056,6 +6076,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
     responses?: ResponseUncheckedCreateNestedManyWithoutPlayerInput
   }
 
@@ -6073,6 +6094,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     responses?: ResponseUpdateManyWithoutPlayerNestedInput
   }
 
@@ -6090,6 +6112,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     responses?: ResponseUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
@@ -6107,6 +6130,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
   }
 
   export type BLPLayerUpdateManyMutationInput = {
@@ -6123,6 +6147,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
   }
 
   export type BLPLayerUncheckedUpdateManyInput = {
@@ -6139,6 +6164,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
   }
 
   export type QuestionCreateInput = {
@@ -6393,6 +6419,7 @@ export namespace Prisma {
     bloodType?: SortOrder
     vision?: SortOrder
     zodiac?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type BLPLayerAvgOrderByAggregateInput = {
@@ -6416,6 +6443,7 @@ export namespace Prisma {
     bloodType?: SortOrder
     vision?: SortOrder
     zodiac?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type BLPLayerMinOrderByAggregateInput = {
@@ -6432,6 +6460,7 @@ export namespace Prisma {
     bloodType?: SortOrder
     vision?: SortOrder
     zodiac?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type BLPLayerSumOrderByAggregateInput = {
@@ -6949,6 +6978,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
   }
 
   export type BLPLayerUncheckedCreateWithoutResponsesInput = {
@@ -6965,6 +6995,7 @@ export namespace Prisma {
     bloodType: string
     vision: number
     zodiac: string
+    imageUrl: string
   }
 
   export type BLPLayerCreateOrConnectWithoutResponsesInput = {
@@ -7014,6 +7045,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
   }
 
   export type BLPLayerUncheckedUpdateWithoutResponsesInput = {
@@ -7030,6 +7062,7 @@ export namespace Prisma {
     bloodType?: StringFieldUpdateOperationsInput | string
     vision?: FloatFieldUpdateOperationsInput | number
     zodiac?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
   }
 
   export type QuestionUpsertWithoutResponsesInput = {

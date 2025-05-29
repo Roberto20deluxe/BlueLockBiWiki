@@ -4,7 +4,10 @@
   "description": "<h1 align = center><img src=\"readme_graphics/BlueLockLogo.svg\" alt=\"BLlogo\" width=\"360vw\"></h1>",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon script.ts"
+    "devStart": "nodemon script.ts",
+    "migrate:dev": "prisma migrate dev",
+    "generate": "prisma generate",
+    "migration": "npm run migrate:dev && npm run generate"
   },
   "keywords": [],
   "author": "",

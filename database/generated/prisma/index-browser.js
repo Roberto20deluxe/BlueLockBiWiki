@@ -141,7 +141,8 @@ exports.Prisma.BLPLayerScalarFieldEnum = {
   shoeSize: 'shoeSize',
   bloodType: 'bloodType',
   vision: 'vision',
-  zodiac: 'zodiac'
+  zodiac: 'zodiac',
+  imageUrl: 'imageUrl'
 };
 
 exports.Prisma.QuestionScalarFieldEnum = {

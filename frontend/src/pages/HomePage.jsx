@@ -24,10 +24,9 @@ const HomePage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setPlayers(mockPlayers);
-    fetch('http://localhost:3001/users')
+    fetch('http://localhost:3001/blplayers')
       .then((res) => res.json())
-      .then((data) => setUsers(data))
+      .then((data) => setPlayers(data))
       .catch((err) => console.error('Erro ao buscar usuários:', err));
   }, []);
 

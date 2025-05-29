@@ -36,6 +36,7 @@ model BLPLayer {
   bloodType  String
   vision     Float
   zodiac     String
+  imageUrl   String
 
   responses Response[]
 }

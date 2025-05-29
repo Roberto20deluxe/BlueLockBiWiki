@@ -7,8 +7,8 @@ const PlayerCard = ({ player }) => {
     <button className="h-[200px] w-[200px] bg-[#FFFFFF] hover:cursor-pointer hover:brightness-80 rounded-[30px] flex flex-col justify-end text-white font-bold text-xl">
         <div className="items-center">
         <img
-            src={NagiPFP}
-            alt="Player"
+            src={`/src/assets/Profiles/${player.imageUrl}`}
+            alt={player.name}
             className="w-[250px] h-[160px] object-contain mx-auto mt-2"
         />
         </div>
