@@ -22,56 +22,43 @@ model User {
   favBLPlayer String?
 }
 
-model BLPlayer {
-  id              String  @id @default(uuid())
-  name            String
-  birthDate       String
-  zodiac          String
-  birthPlace      String
-  family          String
-  height          Float
-  shoeSize        Int
-  vision          Float
-  bloodType       String
-  proTeam         String
-  domLeg          String
-  favPlayer       String
-  startAge        String
-  motto           String
-  nickname        String
-  quality         String
-  defect          String
-  favFood         String
-  hateFood        String
-  riceSideDish    String
-  hobbies         String
-  favSeason       String
-  favStrong       String
-  favMovie        String
-  favColor        String
-  favFamous       String
-  favAnimal       String
-  favSubject      String
-  hateSubject     String
-  freqMagazine    String
-  fetish          String
-  makesHappy      String
-  makesSad        String
-  partnerType     String
-  firstLoveAge    String
-  firstConfession String
-  valentineChoco  String
-  sleepTime       String
-  firstWash       String
-  alwaysBuy       String
-  criedRecently   String
-  disbeliefSanta  String
-  giftSanta       String
-  lastDayPlan     String
-  richPlan        String
-  weekendPlan     String
-  altCareer       String
-  favHistoryChar  String
-  oneObject       String
-  timeMachine     String
+model BLPLayer {
+  id          String    @id @default(uuid())
+  name        String
+  age         Int
+  nickname    String
+  ageComment  String?
+  birthDate   DateTime
+  birthPlace  String
+  height      Float
+  domLeg      String
+  shoeSize    Float
+  bloodType   String
+  vision      Float
+  zodiac      String
+  imageUrl    String
+
+  responses   Response[]
+}
+
+model Question {
+  id          String     @id @default(uuid())
+  text        String
+  orderNumber Int
+
+  responses   Response[]
+}
+
+model Response {
+  id          String    @id @default(uuid())
+  player      BLPLayer  @relation(fields: [playerId], references: [id])
+  playerId    String
+
+  question    Question  @relation(fields: [questionId], references: [id])
+  questionId  String
+
+  answer      String
+  comment     String?
+
+  @@unique([playerId, questionId])
 }
