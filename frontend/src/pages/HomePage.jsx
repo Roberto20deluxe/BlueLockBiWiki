@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TopBarBL from "../components/TopBarBL";
 import PlayerCard from "../components/PlayerCard";
-
-const mockPlayers = [
-  { id: 1, name: "Isagi Yoichi" },
-  { id: 2, name: "Bachira Meguru" },
-  { id: 3, name: "Nagi Seishiro" },
-  { id: 4, name: "Chigiri Hyoma" },
-  { id: 5, name: "Kunigami Rensuke" },
-  { id: 6, name: "Barou Shoei" },
-  { id: 7, name: "Reo Mikage" },
-  { id: 8, name: "Tokimitsu Aoshi" },
-  { id: 9, name: "Aryu Jyubei" },
-  { id: 10, name: "Gagamaru Gin" },
-  { id: 11, name: "Sae Itoshi" },
-  { id: 12, name: "Rin Itoshi" },
-  { id: 13, name: "Hiori Yo" },
-  { id: 14, name: "Naruhaya Asahi" }
-];
+import AddPlayerCard from "../components/AddPlayerCard";
+import PlayerCreationModal from "../components/PlayerCreationModal";
+import PlayerModal from "../components/PlayerModal";
 
 const HomePage = () => {
+  const [modal, setModal] = useState(false)
   const [players, setPlayers] = useState([]);
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/blplayers')
@@ -29,6 +15,10 @@ const HomePage = () => {
       .then((data) => setPlayers(data))
       .catch((err) => console.error('Erro ao buscar usuários:', err));
   }, []);
+
+  const alterModal = () => {
+    setModal(!modal);
+  }
 
   return (
     <>
@@ -38,8 +28,15 @@ const HomePage = () => {
           {players.map((player) => (
             <PlayerCard key={player.id} player={player} />
           ))}
+          <button onClick={alterModal} className="contents">
+            <AddPlayerCard/>
+          </button>
         </div>
       </div>
+          
+      <PlayerModal open={modal} onClose={alterModal}>
+        <PlayerCreationModal players={players} />
+      </PlayerModal>
     </>
   );
 }

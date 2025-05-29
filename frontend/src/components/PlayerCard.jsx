@@ -1,6 +1,4 @@
 import React from "react";
-import NagiPFP from '../assets/Profiles/Nagi_PFP.png';
-
 
 const PlayerCard = ({ player }) => {
   return (

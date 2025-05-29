@@ -1,15 +1,16 @@
 import React from "react";
 import searchIcon from '../assets/General-Icons/searchIcon.png';
 import userIcon from '../assets/General-Icons/userIcon.png';
+import BlueLockLogo from '../assets/General-Icons/BlueLockLogo.svg'
 
 const TopBarBL= () => {
   return (
     <>
-    <div className="h-[70px] bg-[#3B82F6] grid grid-cols-[250px_1fr_250px] items-center">
+    <div className="h-[80px] bg-[#3B82F6] grid grid-cols-[250px_1fr_250px] items-center">
       {/* Caixa preta extrema esquerda */}
-      <div className="flex items-center flex-1">
-        <div className="bg-black w-full h-[70px] ml-4"></div>
-      </div>
+      <button className="flex items-center justify-center flex-1">
+        <img src={BlueLockLogo} className="h-[80px] w-[170px] ml-4 hover:cursor-pointer"/>
+      </button>
       {/* Search bar centralizada */}
       <div className="flex-1 flex justify-center">
         <div className="relative w-[860px]">
@@ -24,9 +25,9 @@ const TopBarBL= () => {
         </div>
       </div>
       {/* userIcon extrema direita */}
-      <div className="flex items-center justify-end flex-1 mr-12">
-        <img src={userIcon} alt="user icon" className="w-12 h-12 object-contain" />
-      </div>
+      <button className="flex items-center justify-end flex-1 mr-12">
+        <img src={userIcon} alt="user icon" className="w-12 h-12 object-contain hover:cursor-pointer" />
+      </button>
     </div>
     </>
   );
