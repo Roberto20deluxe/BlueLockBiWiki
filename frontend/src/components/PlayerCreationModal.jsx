@@ -44,8 +44,8 @@ const PlayerCreationModal = ({ onPlayerCreated }) => {
 
   return (
     <div className="flex w-full h-[700px] justify-center items-center">
-      <div className="rounded-md p-6 w-[480px] h-auto flex flex-col gap-4 justify-center items-center">
-        <div className="text-white text-[40px] font-semibold mb-6">Criação de Jogador</div>
+      <div className="rounded-md p-6 w-[550px] h-auto flex flex-col gap-4 justify-center items-center">
+        <div className="text-white text-[40px] font-semibold mb-2">Criação de Jogador</div>
         <form ref={formRef} onSubmit={handleCreate} className="w-full flex flex-col gap-4">
           <div className="grid gap-3">
             <div className="grid grid-cols-2 gap-3">
@@ -73,7 +73,7 @@ const PlayerCreationModal = ({ onPlayerCreated }) => {
               <input name="zodiac" placeholder="Zodiac" className="input input-bordered rounded-[8px] bg-white p-3 max-w-xs" />
             </div>
             <div>
-              <input name="imageUrl" placeholder="Image file's name" className="input input-bordered rounded-[8px] bg-white p-3 max-w-md w-full" />
+              <input name="imageUrl" placeholder="Image file's name" className="input input-bordered rounded-[8px] bg-white p-3 w-full" />
             </div>
           </div>
           <div className="flex justify-center">
