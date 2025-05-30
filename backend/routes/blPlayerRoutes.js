@@ -14,13 +14,24 @@ router.get('/blplayers', async (req, res) => {
 
 router.post('/blplayers', async (req, res) => {
     try {
-        const { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl } = req.body
-        const newPlayer = await prisma.bLPLayer.create({ data: { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl } })
-        res.status(201).json(newPlayer)
+        let { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl, ageComment } = req.body;
+        // Converte birthDate para Date se for string
+        if (birthDate) {
+            birthDate = new Date(birthDate);
+            if (isNaN(birthDate.getTime())) {
+                return res.status(400).json({ error: 'Data de nascimento inválida' });
+            }
+        }
+        const newPlayer = await prisma.bLPLayer.create({
+            data: {name, age, nickname, ageComment, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl
+            }
+        });
+        res.status(201).json(newPlayer);
     } catch (err) {
-        res.status(500).json({ error: 'Erro ao criar jogador' })
+        console.log(err);
+        res.status(500).json({ error: 'Erro ao criar jogador' });
     }
-})
+});
 
 router.put('/blplayers/:id', async (req, res) => {
     try {
