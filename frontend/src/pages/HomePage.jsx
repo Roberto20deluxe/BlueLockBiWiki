@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TopBarBL from "../components/TopBarBL";
 import PlayerCard from "../components/PlayerCard";
-import AddPlayerCard from "../components/AddPlayerCard";
-import PlayerCreationModal from "../components/PlayerCreationModal";
-import PlayerModal from "../components/PlayerModal";
+import AddPlayerCard from "../components/AddPlayerCard";  
 
 const HomePage = () => {
-  const [modal, setModal] = useState(false)
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -16,10 +13,6 @@ const HomePage = () => {
       .catch((err) => console.error('Erro ao buscar usuários:', err));
   }, []);
 
-  const alterModal = () => {
-    setModal(!modal);
-  }
-
   return (
     <>
       <TopBarBL />
@@ -28,15 +21,11 @@ const HomePage = () => {
           {players.map((player) => (
             <PlayerCard key={player.id} player={player} />
           ))}
-          <button onClick={alterModal} className="contents">
+          <button className="contents">
             <AddPlayerCard/>
           </button>
         </div>
       </div>
-          
-      <PlayerModal open={modal} onClose={alterModal}>
-        <PlayerCreationModal players={players} />
-      </PlayerModal>
     </>
   );
 }
