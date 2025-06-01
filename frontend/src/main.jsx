@@ -6,6 +6,6 @@ import PlayerCreation from './pages/PlayerCreation.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HomePage />
+    <PlayerCreation />
   </StrictMode>,
 )
