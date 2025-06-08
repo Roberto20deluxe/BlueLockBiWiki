@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
+import api from "../services/api";
 import TopBarBL from "../components/TopBarBL";
 import PlayerCard from "../components/PlayerCard";
 import AddPlayerCard from "../components/AddPlayerCard";  
 
+type Player = {
+  id: number;
+  name: string;
+  imageUrl: string;
+};
+
 const HomePage = () => {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<Player[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/blplayers')
-      .then((res) => res.json())
-      .then((data) => setPlayers(data))
+    api.get("/blplayers")
+      .then((res) => setPlayers(res.data))
       .catch((err) => console.error('Erro ao buscar usuários:', err));
   }, []);
 
