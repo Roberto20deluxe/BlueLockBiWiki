@@ -2,15 +2,18 @@ import React from "react";
 import searchIcon from '../assets/General-Icons/searchIcon.png';
 import userIcon from '../assets/General-Icons/userIcon.png';
 import BlueLockLogo from '../assets/General-Icons/BlueLockLogo.svg'
+import { Link } from "react-router-dom";
 
 const TopBarBL= () => {
   return (
     <>
     <div className="h-[80px] bg-[#3B82F6] grid grid-cols-[250px_1fr_250px] items-center">
-      {/* Caixa preta extrema esquerda */}
-      <button className="flex items-center justify-center flex-1">
-        <img src={BlueLockLogo} className="h-[80px] w-[170px] ml-4 hover:cursor-pointer"/>
-      </button>
+      {/* Simbolo Blue Lock */}
+      <Link to={`/`}>
+        <button className="flex items-center justify-center flex-1">
+          <img src={BlueLockLogo} className="h-[80px] w-[170px] ml-4 hover:cursor-pointer"/>
+        </button>
+      </Link>
       {/* Search bar centralizada */}
       <div className="flex-1 flex justify-center">
         <div className="relative w-[860px]">
