@@ -1,8 +1,15 @@
 import React from "react";
-import NagiPFP from '../assets/Profiles/Nagi_PFP.png';
 
+type Player = {
+  name: string;
+  imageUrl: string;
+}
 
-const PlayerCard = ({ player }) => {
+type PlayerCardProps = {
+  player: Player;
+}
+
+const PlayerCard = ({ player }: PlayerCardProps) => {
   return (
     <button className="h-[200px] w-[200px] bg-[#FFFFFF] hover:cursor-pointer hover:brightness-80 rounded-[30px] flex flex-col justify-end text-white font-bold text-xl">
         <div className="items-center">

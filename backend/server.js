@@ -8,7 +8,13 @@ const prisma = require('./prismaClient')
 
 const userRoutes = require('./routes/userRoutes')
 const blPlayerRoutes = require('./routes/blPlayerRoutes')
+const questions = require('./routes/questionRoutes')
+const responses = require('./routes/responseRoutes')
+const complete = require('./routes/completeRoutes')
 app.use(userRoutes)
 app.use(blPlayerRoutes)
+app.use(questions)
+app.use(responses)
+app.use(complete)
 
 app.listen(3001, () => {console.log("Server started on 3001")})
