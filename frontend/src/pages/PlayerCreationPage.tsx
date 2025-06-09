@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import api from "../services/api";
 import TopBarBL from "../components/TopBarBL";
-import PlayerCard from "../components/PlayerCard";
-import AddPlayerCard from "../components/AddPlayerCard";
 
 type PlayerDetails = {
   id: number;
@@ -27,7 +25,7 @@ type QuestionsProps = {
   orderNumber: number;
 };
 
-const CharacterPage = () => {
+const PlayerCreationPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [BLplayers, setBLPlayers] = useState<PlayerDetails[]>([]);
   const [chosenPlayer, setChosenPlayer] = useState<string>("");
@@ -162,6 +160,7 @@ const CharacterPage = () => {
 
   return (
     <div className="min-w-screen min-h-screen overflow-y-auto bg-[#1046A9]">
+      <TopBarBL/>
       <div className="flex justify-center">
         <div className="flex col-end-2 mt-[30px] bg-white w-[1830px] h-[800px]">
           {/*FORMS TO CREATE A PLAYER*/}
@@ -348,4 +347,4 @@ const CharacterPage = () => {
   );
 };
 
-export default CharacterPage;
+export default PlayerCreationPage;
