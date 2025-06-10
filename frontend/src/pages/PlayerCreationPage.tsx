@@ -3,7 +3,7 @@ import api from "../services/api";
 import TopBarBL from "../components/TopBarBL";
 
 type PlayerDetails = {
-  id: number;
+  id: string;
   name: string;
   nickname: string;
   age: number;
