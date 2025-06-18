@@ -11,7 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 const router = createBrowserRouter([
   { path: "*", element: <NotFoundPage/>},
   { path: "/", element: <HomePage/> },
-  { path: "/sign-up", element: <SignUpPage/> },
+  { path: "/login", element: <SignUpPage/> },
   { path: "/view/:id", element: <ViewPlayerPage/> },
   { path: "/create", element: <PlayerCreationPage/> }
 ]);
