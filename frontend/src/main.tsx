@@ -5,13 +5,13 @@ import HomePage from './pages/HomePage'
 import PlayerCreationPage from './pages/PlayerCreationPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ViewPlayerPage from './pages/ViewPlayerPage'
-import SignUpPage from './pages/SignUpPage'
+import LoginPage from './pages/LoginPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
   { path: "*", element: <NotFoundPage/>},
   { path: "/", element: <HomePage/> },
-  { path: "/login", element: <SignUpPage/> },
+  { path: "/login", element: <LoginPage/> },
   { path: "/view/:id", element: <ViewPlayerPage/> },
   { path: "/create", element: <PlayerCreationPage/> }
 ]);

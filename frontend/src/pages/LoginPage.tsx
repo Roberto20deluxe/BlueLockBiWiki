@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SignUpPage = () => {
+const LoginPage = () => {
 
     const handleLogIn = (event: React.FormEvent<HTMLFormElement>) => {}
 
@@ -25,4 +25,4 @@ const SignUpPage = () => {
     );
 };
 
-export default SignUpPage;
+export default LoginPage;
