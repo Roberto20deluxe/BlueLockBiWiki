@@ -29,7 +29,7 @@ const TopBarBL= () => {
       </div>
       {/* userIcon extrema direita */}
       <button className="flex items-center justify-end flex-1 mr-12">
-        <Link to={`/sign-up`}>
+        <Link to={`/register`}>
           <img src={userIcon} alt="user icon" className="w-12 h-12 object-contain hover:cursor-pointer" />
         </Link>
       </button>

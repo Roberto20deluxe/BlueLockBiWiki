@@ -17,7 +17,7 @@ const LoginPage = () => {
                     </button>
                     <div className="flex justify-between text-white text-sm">
                         <span className="cursor-pointer hover:underline">forgot my password</span>
-                        <Link to="/login" className="hover:underline">sign in</Link>
+                        <Link to="/register" className="hover:underline">sign up</Link>
                     </div>
                 </form>
             </div>

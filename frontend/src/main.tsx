@@ -7,11 +7,13 @@ import NotFoundPage from './pages/NotFoundPage'
 import ViewPlayerPage from './pages/ViewPlayerPage'
 import LoginPage from './pages/LoginPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import SignUpPage from './pages/SignUpPage'
 
 const router = createBrowserRouter([
   { path: "*", element: <NotFoundPage/>},
   { path: "/", element: <HomePage/> },
   { path: "/login", element: <LoginPage/> },
+  { path: "/register", element: <SignUpPage/> },
   { path: "/view/:id", element: <ViewPlayerPage/> },
   { path: "/create", element: <PlayerCreationPage/> }
 ]);
