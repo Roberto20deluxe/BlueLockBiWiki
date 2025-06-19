@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const prisma = require('../prismaClient')
+const bcrypt = require('bcrypt')
 
 router.get('/users', async (req, res) => {
     try {
@@ -15,7 +16,9 @@ router.get('/users', async (req, res) => {
 router.post('/users', async (req, res) => {
     try {
         const { username, email, password } = req.body
-        const newUser = await prisma.user.create({ data: { username, email, password } })
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        const newUser = await prisma.user.create({ data: { username, email, password: hashedPassword } })
         res.status(201).json(newUser)
     } catch (err) {
         res.status(500).json({ error: 'Erro ao criar usuário' })
