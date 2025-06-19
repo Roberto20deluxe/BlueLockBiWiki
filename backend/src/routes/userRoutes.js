@@ -14,8 +14,8 @@ router.get('/users', async (req, res) => {
 
 router.post('/users', async (req, res) => {
     try {
-        const { name, email, password, favBLPlayer } = req.body
-        const newUser = await prisma.user.create({ data: { name, email, password, favBLPlayer } })
+        const { username, email, password } = req.body
+        const newUser = await prisma.user.create({ data: { username, email, password } })
         res.status(201).json(newUser)
     } catch (err) {
         res.status(500).json({ error: 'Erro ao criar usuário' })
@@ -24,10 +24,10 @@ router.post('/users', async (req, res) => {
 
 router.put('/users/:id', async (req, res) => {
     try {
-        const { name, email, password, favBLPlayer } = req.body
+        const { username, email, password } = req.body
         const updatedUser = await prisma.user.update({
             where: { id: req.params.id },
-            data: { name, email, password, favBLPlayer }
+            data: { username, email, password }
         })
         res.json(updatedUser)
     } catch (err) {
