@@ -25,6 +25,24 @@ router.post('/users', async (req, res) => {
     }
 })
 
+router.post('/users/login', async (req, res) => {
+    const { email, password } = req.body
+    const user = await prisma.user.findUnique({ where: { email } })
+    if (user == null){
+        return res.status(400).json("Esse usuário não existe")
+    }
+
+    try {
+        if (await bcrypt.compare(password, user.password)) {
+            res.status(200).json("Sucesso ao logar!")
+        } else {
+            res.status(401).json("Não permitido logar!")
+        }
+    } catch (err) {
+        res.status(500).json({err: "Erro ao logar usuário"})
+    }
+})
+
 router.put('/users/:id', async (req, res) => {
     try {
         const { username, email, password } = req.body
