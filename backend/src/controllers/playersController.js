@@ -10,7 +10,7 @@ async function getBlPlayers(req, res){
 }
 
 async function postBlPlayer(req, res){
-    const { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl, ageComment } = req.body;
+    let { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl, ageComment } = req.body;
     if (birthDate) {
         birthDate = new Date(birthDate);
         if (isNaN(birthDate.getTime())) {
@@ -29,7 +29,13 @@ async function postBlPlayer(req, res){
 }
 
 async function updateBlPlayer(req, res){
-    const { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl, ageComment } = req.body;
+    let { name, age, nickname, birthDate, birthPlace, height, domLeg, shoeSize, bloodType, vision, zodiac, imageUrl, ageComment } = req.body;
+    if (birthDate) {
+        birthDate = new Date(birthDate);
+        if (isNaN(birthDate.getTime())) {
+            return res.status(400).json({ error: 'Data de nascimento inválida' });
+        }
+    }
     try {
         const jogadorAtualizado = await prisma.bLPLayer.update({
             where: { id: req.params.id },
@@ -48,7 +54,7 @@ async function deleteBlPlayer(req, res){
         })
         res.json("Jogador apagado com sucesso")
     } catch (err) {
-        res.json(500).json({ error: "Erro ao apagar jogador" })
+        res.status(500).json({ error: "Erro ao apagar jogador" })
     }
 }
 

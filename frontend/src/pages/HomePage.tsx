@@ -15,7 +15,12 @@ const HomePage = () => {
   const [players, setPlayers] = useState<Player[]>([])
 
   useEffect(() => {
-    api.get("/blplayers")
+    const token = localStorage.getItem("token");
+    api.get("/blplayers", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then((res) => setPlayers(res.data))
       .catch((err) => console.error('Erro ao buscar usuários:', err));
   }, []);

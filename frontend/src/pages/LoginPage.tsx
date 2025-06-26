@@ -23,7 +23,8 @@ const LoginPage = () => {
         const formData = { email, password }
 
         try {
-            const permission = await api.post('/users/login', formData);
+            const permission = await api.post('/users/login', formData)
+            localStorage.setItem("token", permission.data.accessToken);
             form.reset();
             if (permission.status === 200) {
                 navigate("/");

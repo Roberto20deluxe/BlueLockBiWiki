@@ -38,7 +38,12 @@ const PlayerCreationPage = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const newPlayers = await api.get("/blplayers");
+        const token = localStorage.getItem("token");
+        const newPlayers = await api.get("/blplayers", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         setBLPlayers(Array.isArray(newPlayers.data) ? newPlayers.data : []);
       } catch (err) {
         console.log(err);
@@ -53,7 +58,12 @@ const PlayerCreationPage = () => {
     const fetchPlayerDetails = async () => {
       if (chosenPlayer) {
         try {
-          const info = await api.get(`/complete/${chosenPlayer}`);
+          const token = localStorage.getItem("token")
+          const info = await api.get(`/complete/${chosenPlayer}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
           setChosenPlayerDetails(info.data);
         } catch (err) {
           console.log(err);
@@ -69,7 +79,12 @@ const PlayerCreationPage = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const info = await api.get("/questions");
+        const token = localStorage.getItem("token");
+        const info = await api.get("/questions", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const sorted = info.data.sort(
           (a: QuestionsProps, b: QuestionsProps) => a.orderNumber - b.orderNumber
         );
@@ -97,6 +112,7 @@ const PlayerCreationPage = () => {
     }
 
     try {
+      const token = localStorage.getItem("token")
       await Promise.all(
         questions.map((ask) =>
           api.post("/responses", {
@@ -104,6 +120,10 @@ const PlayerCreationPage = () => {
             questionId: ask.id,
             answer: answers[ask.id],
             comment: comments[ask.id] || "",
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           })
         )
       );
@@ -111,7 +131,11 @@ const PlayerCreationPage = () => {
       setComments({});
 
       //UPDATES PLAYER'S DETAILS
-      const updatedPlayerDetails = await api.get(`/complete/${chosenPlayer}`);
+      const updatedPlayerDetails = await api.get(`/complete/${chosenPlayer}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setChosenPlayerDetails(updatedPlayerDetails.data);
     } catch (err) {
       console.log("Erro ao enviar as respostas");
@@ -149,8 +173,17 @@ const PlayerCreationPage = () => {
     };
 
     try {
-      await api.post("/blplayers", formData);
-      const newPlayers = await api.get("/blplayers");
+      const token = localStorage.getItem("token");
+      await api.post("/blplayers", formData, {
+        headers: {
+          Authorization: `Authorization ${token}`
+        }
+      });
+      const newPlayers = await api.get("/blplayers", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setBLPlayers(Array.isArray(newPlayers.data) ? newPlayers.data : []);
       form.reset();
     } catch (err) {

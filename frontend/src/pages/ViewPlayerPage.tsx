@@ -42,7 +42,12 @@ const ViewPlayerPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const playerRes = await api.get(`/complete/${id}`);
+                const token = localStorage.getItem("token");
+                const playerRes = await api.get(`/complete/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setPlayerInfo(playerRes.data);
                 setResponses(playerRes.data.responses || []);
             } catch (err) {

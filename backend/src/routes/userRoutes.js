@@ -1,12 +1,11 @@
-// Rotas de usuário separadas como um Router
 const express = require('express')
 const router = express.Router()
-const authController = require('../controllers/authController')
+const userController = require('../controllers/userController')
 
-router.get('/users', authController.getAllUsers);
-router.post('/users', authController.createUser);
-router.post('/users/login', authController.loginCheck);
-router.put('/users/:id', authController.updateUser);
-router.delete('/users/:id', authController.deleteUser);
+router.get('/users', userController.getAllUsers);
+router.post('/users', userController.createUser); //Não deve ter um middle entre o requerimento e função
+router.post('/users/login', userController.loginCheck); //Não deve ter um middleware entre o requerimento e função
+router.put('/users/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
 
 module.exports = router
