@@ -1,7 +1,7 @@
 require('dotenv').config();
 const prisma = require('../prismaClient')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const refreshTokenController = require("../controllers/refreshTokenController")
 
 async function getAllUsers(req, res){
     try {
@@ -20,9 +20,14 @@ async function createUser(req, res){
         const novoUsuario = await prisma.user.create({
             data: { username, email, password: senhaHashed }
         });
-        const token = jwt.sign({ userId: novoUsuario.id, email: novoUsuario.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2m' })
-        res.status(200).json({ accessToken: token });
+        const token = refreshTokenController.generateAccessToken(novoUsuario.id, novoUsuario.email)
+        const refreshToken = refreshTokenController.generateRefreshToken(novoUsuario.id, novoUsuario.email)
+
+        await refreshTokenController.storeRefreshToken(refreshToken)
+        
+        res.status(200).json({ accessToken: token, refreshToken: refreshToken });
      } catch (err) {
+        console.error('Erro ao criar usuário:', err);
         res.status(500).json({ error: "Erro ao criar usuário" })
      }
 }
@@ -35,12 +40,17 @@ async function loginCheck(req, res){
         if (!usuario) return res.status(401).json({ error: "Usuário não encontrado"})
         
         if (await bcrypt.compare(password, usuario.password)) {
-            const token = jwt.sign({ userId: usuario.id, email: usuario.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2m' })
-            res.status(200).json({ accessToken: token })
+            const token = refreshTokenController.generateAccessToken(usuario.id, usuario.email)
+            const refreshToken = refreshTokenController.generateRefreshToken(usuario.id, usuario.email)
+            
+            await refreshTokenController.storeRefreshToken(refreshToken)
+            
+            res.status(200).json({ accessToken: token, refreshToken: refreshToken })
         } else {
             res.status(401).json({ error: "Credenciais inválidas!" })
         }
     } catch (err) {
+        console.error('Erro no login:', err);
         res.status(500).json({ error: err.message })
     }
 }
@@ -63,6 +73,26 @@ async function updateUser(req, res){
     }
 }
 
+async function logoutUser(req, res) {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(400).json({ error: "Token é obrigatório" });
+    }
+
+    try {
+        await refreshTokenController.deleteRefreshToken(token)
+        return res.status(203).json("Deslogado com sucesso")
+        
+    } catch (err) {
+        console.error('Erro ao fazer logout:', err);
+        if (err.code === 'P2025') {
+            return res.status(404).json({ error: "RefreshToken não encontrado" });
+        }
+        return res.status(403).json({ error: "Erro ao tentar deslogar"})
+    }
+}
+
 async function deleteUser(req, res){
     try {
         await prisma.user.delete({ where: { id: req.params.id }})
@@ -77,5 +107,6 @@ module.exports = {
     createUser,
     loginCheck,
     updateUser,
-    deleteUser
+    logoutUser,
+    deleteUser,
 }

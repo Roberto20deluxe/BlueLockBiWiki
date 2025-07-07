@@ -63,3 +63,8 @@ model Response {
 
   @@unique([playerId, questionId])
 }
+
+model RefreshToken {
+  id    String @id @default(uuid())
+  token String @unique
+}

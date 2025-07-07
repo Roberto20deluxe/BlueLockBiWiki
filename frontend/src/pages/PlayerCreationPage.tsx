@@ -34,16 +34,10 @@ const PlayerCreationPage = () => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [comments, setComments] = useState<{ [key: string]: string }>({});
 
-//BLPLAYER'S GET
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const newPlayers = await api.get("/blplayers", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const newPlayers = await api.get("/blplayers");
         setBLPlayers(Array.isArray(newPlayers.data) ? newPlayers.data : []);
       } catch (err) {
         console.log(err);
@@ -53,17 +47,11 @@ const PlayerCreationPage = () => {
     fetchPlayers();
   }, []);
 
-  //CHOSEN PLAYER COMPLETE INFORMATION GET
   useEffect(() => {
     const fetchPlayerDetails = async () => {
       if (chosenPlayer) {
         try {
-          const token = localStorage.getItem("token")
-          const info = await api.get(`/complete/${chosenPlayer}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
+          const info = await api.get(`/complete/${chosenPlayer}`);
           setChosenPlayerDetails(info.data);
         } catch (err) {
           console.log(err);
@@ -75,16 +63,10 @@ const PlayerCreationPage = () => {
     fetchPlayerDetails();
   }, [chosenPlayer]);
 
-  //QUESTION'S GET
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const info = await api.get("/questions", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const info = await api.get("/questions");
         const sorted = info.data.sort(
           (a: QuestionsProps, b: QuestionsProps) => a.orderNumber - b.orderNumber
         );
@@ -96,7 +78,6 @@ const PlayerCreationPage = () => {
     fetchQuestions();
   }, []);
 
-  //POST ANSWERS TO DATABASE
   const handleResponses = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!chosenPlayer) {
@@ -130,19 +111,13 @@ const PlayerCreationPage = () => {
       setAnswers({});
       setComments({});
 
-      //UPDATES PLAYER'S DETAILS
-      const updatedPlayerDetails = await api.get(`/complete/${chosenPlayer}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const updatedPlayerDetails = await api.get(`/complete/${chosenPlayer}`);
       setChosenPlayerDetails(updatedPlayerDetails.data);
     } catch (err) {
       console.log("Erro ao enviar as respostas");
     }
   };
 
-  //POST NEW PLAYER TO DATABASE
   const handleCreatePlayer = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = formRef.current;
@@ -174,16 +149,8 @@ const PlayerCreationPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await api.post("/blplayers", formData, {
-        headers: {
-          Authorization: `Authorization ${token}`
-        }
-      });
-      const newPlayers = await api.get("/blplayers", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await api.post("/blplayers", formData);
+      const newPlayers = await api.get("/blplayers");
       setBLPlayers(Array.isArray(newPlayers.data) ? newPlayers.data : []);
       form.reset();
     } catch (err) {

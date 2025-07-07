@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../services/api";
+import { useAuth } from "../services/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
@@ -34,6 +35,12 @@ const SignUpPage = () => {
 
             if (response.status === 200) {
                 console.log("Sign up successful!");
+                
+                useAuth.setTokens(
+                    response.data.accessToken,
+                    response.data.refreshToken
+                );
+                
                 navigate("/")
             }
         } catch (error) {
