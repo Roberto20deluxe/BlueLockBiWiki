@@ -159,11 +159,6 @@ exports.Prisma.ResponseScalarFieldEnum = {
   comment: 'comment'
 };
 
-exports.Prisma.RefreshTokenScalarFieldEnum = {
-  id: 'id',
-  token: 'token'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -184,8 +179,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   BLPLayer: 'BLPLayer',
   Question: 'Question',
-  Response: 'Response',
-  RefreshToken: 'RefreshToken'
+  Response: 'Response'
 };
 
 /**

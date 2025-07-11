@@ -1,7 +1,7 @@
 require('dotenv').config();
 const prisma = require('../prismaClient')
 const bcrypt = require('bcrypt')
-const refreshTokenController = require("../controllers/refreshTokenController")
+const TokenController = require("./TokenController")
 
 async function getAllUsers(req, res){
     try {
@@ -16,18 +16,37 @@ async function createUser(req, res){
      const { username, email, password } = req.body;
      
      try{
+        const emailExistente = await prisma.user.findUnique({
+            where: { email }
+        });
+        
+        if (emailExistente) {
+            return res.status(400).json({ error: "Usuário com este email já existe" });
+        }
+
         const senhaHashed = await bcrypt.hash(password, 10);
         const novoUsuario = await prisma.user.create({
             data: { username, email, password: senhaHashed }
         });
-        const token = refreshTokenController.generateAccessToken(novoUsuario.id, novoUsuario.email)
-        const refreshToken = refreshTokenController.generateRefreshToken(novoUsuario.id, novoUsuario.email)
-
-        await refreshTokenController.storeRefreshToken(refreshToken)
+        const token = TokenController.generateAccessToken(novoUsuario.id, novoUsuario.email)
+        const refreshToken = TokenController.generateRefreshToken(novoUsuario.id, novoUsuario.email)
         
-        res.status(200).json({ accessToken: token, refreshToken: refreshToken });
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000 // 15 minutos
+        });
+        
+        res.status(200).json({ accessToken: token });
      } catch (err) {
         console.error('Erro ao criar usuário:', err);
+        
+        // Handle specific Prisma errors
+        if (err.code === 'P2002') {
+            return res.status(400).json({ error: "Usuário com este email já existe" });
+        }
+        
         res.status(500).json({ error: "Erro ao criar usuário" })
      }
 }
@@ -40,12 +59,17 @@ async function loginCheck(req, res){
         if (!usuario) return res.status(401).json({ error: "Usuário não encontrado"})
         
         if (await bcrypt.compare(password, usuario.password)) {
-            const token = refreshTokenController.generateAccessToken(usuario.id, usuario.email)
-            const refreshToken = refreshTokenController.generateRefreshToken(usuario.id, usuario.email)
+            const token = TokenController.generateAccessToken(usuario.id, usuario.email)
+            const refreshToken = TokenController.generateRefreshToken(usuario.id, usuario.email)
             
-            await refreshTokenController.storeRefreshToken(refreshToken)
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 15 * 60 * 1000 // 15 minutos
+            });
             
-            res.status(200).json({ accessToken: token, refreshToken: refreshToken })
+            res.status(200).json({ accessToken: token })
         } else {
             res.status(401).json({ error: "Credenciais inválidas!" })
         }
@@ -74,15 +98,16 @@ async function updateUser(req, res){
 }
 
 async function logoutUser(req, res) {
-    const { token } = req.body;
+    const token = req.cookies.refreshToken;
 
     if (!token) {
         return res.status(400).json({ error: "Token é obrigatório" });
     }
 
     try {
-        await refreshTokenController.deleteRefreshToken(token)
-        return res.status(203).json("Deslogado com sucesso")
+        res.clearCookie('refreshToken');
+        
+        return res.status(200).json({ message: "Deslogado com sucesso" })
         
     } catch (err) {
         console.error('Erro ao fazer logout:', err);

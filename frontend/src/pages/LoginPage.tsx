@@ -26,10 +26,7 @@ const LoginPage = () => {
         try {
             const response = await api.post('/users/login', formData)
             
-            useAuth.setTokens(
-                response.data.accessToken, 
-                response.data.refreshToken
-            );
+            useAuth.setAccessToken(response.data.accessToken);
             
             form.reset();
             if (response.status === 200) {

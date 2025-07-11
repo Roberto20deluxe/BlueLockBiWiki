@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const authController = require("../controllers/authController")
-const refreshTokenController = require("../controllers/refreshTokenController")
+const TokenController = require("../controllers/TokenController")
 
-router.get('/token/verify', refreshTokenController.newAccessToken)
-router.post('/token', authController.authenticateToken, refreshTokenController.storeRefreshToken)
+router.get('/token/verify', TokenController.newAccessToken)
 
 module.exports = router;

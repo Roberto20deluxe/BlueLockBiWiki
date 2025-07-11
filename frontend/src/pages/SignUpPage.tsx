@@ -36,10 +36,7 @@ const SignUpPage = () => {
             if (response.status === 200) {
                 console.log("Sign up successful!");
                 
-                useAuth.setTokens(
-                    response.data.accessToken,
-                    response.data.refreshToken
-                );
+                useAuth.setAccessToken(response.data.accessToken);
                 
                 navigate("/")
             }

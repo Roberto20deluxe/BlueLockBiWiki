@@ -11,17 +11,11 @@ const TopBarBL= () => {
   const handleLogOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     
-    const refreshToken = useAuth.getRefreshToken();
-    if (!refreshToken) {
-      useAuth.logout();
-      return;
-    }
-    
     try {
-      const response = await api.post('/logout', { token: refreshToken });
-      if (response.status !== 203) throw new Error("Algo deu errado ao tentar deslogar");
-      
-      useAuth.logout(); 
+      const response = await api.post('/logout');
+      if (response.status === 200) {
+        useAuth.logout(); 
+      }
     } catch (error) {
       console.error('Erro no logout:', error);
       useAuth.logout();
