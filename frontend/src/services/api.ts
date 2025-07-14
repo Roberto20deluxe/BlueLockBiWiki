@@ -3,7 +3,7 @@ import { useAuth } from "./useAuth";
 
 const api = axios.create({
     baseURL: "http://localhost:3001",
-    withCredentials: true // Para enviar cookies automaticamente
+    withCredentials: true 
 });
 
 api.interceptors.request.use(
