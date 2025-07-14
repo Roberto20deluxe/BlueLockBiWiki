@@ -34,7 +34,6 @@ const PlayerCreationPage = () => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [comments, setComments] = useState<{ [key: string]: string }>({});
 
-//BLPLAYER'S GET
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -48,7 +47,6 @@ const PlayerCreationPage = () => {
     fetchPlayers();
   }, []);
 
-  //CHOSEN PLAYER COMPLETE INFORMATION GET
   useEffect(() => {
     const fetchPlayerDetails = async () => {
       if (chosenPlayer) {
@@ -65,7 +63,6 @@ const PlayerCreationPage = () => {
     fetchPlayerDetails();
   }, [chosenPlayer]);
 
-  //QUESTION'S GET
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -81,7 +78,6 @@ const PlayerCreationPage = () => {
     fetchQuestions();
   }, []);
 
-  //POST ANSWERS TO DATABASE
   const handleResponses = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!chosenPlayer) {
@@ -97,6 +93,7 @@ const PlayerCreationPage = () => {
     }
 
     try {
+      const token = localStorage.getItem("token")
       await Promise.all(
         questions.map((ask) =>
           api.post("/responses", {
@@ -104,13 +101,16 @@ const PlayerCreationPage = () => {
             questionId: ask.id,
             answer: answers[ask.id],
             comment: comments[ask.id] || "",
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           })
         )
       );
       setAnswers({});
       setComments({});
 
-      //UPDATES PLAYER'S DETAILS
       const updatedPlayerDetails = await api.get(`/complete/${chosenPlayer}`);
       setChosenPlayerDetails(updatedPlayerDetails.data);
     } catch (err) {
@@ -118,7 +118,6 @@ const PlayerCreationPage = () => {
     }
   };
 
-  //POST NEW PLAYER TO DATABASE
   const handleCreatePlayer = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = formRef.current;
@@ -149,6 +148,7 @@ const PlayerCreationPage = () => {
     };
 
     try {
+      const token = localStorage.getItem("token");
       await api.post("/blplayers", formData);
       const newPlayers = await api.get("/blplayers");
       setBLPlayers(Array.isArray(newPlayers.data) ? newPlayers.data : []);

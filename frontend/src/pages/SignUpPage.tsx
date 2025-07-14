@@ -1,9 +1,11 @@
 import React from "react";
 import api from "../services/api";
-import { Link } from "react-router-dom";
+import { useAuth } from "../services/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
     const formRef = React.useRef<HTMLFormElement>(null);
+    const navigate = useNavigate();
 
     const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,9 +30,16 @@ const SignUpPage = () => {
         const formData = { username, email, password };
 
         try {
-            await api.post("/users", formData);
+            const response = await api.post("/users", formData);
             form.reset();
-            alert("Sign up successful!");
+
+            if (response.status === 200) {
+                console.log("Sign up successful!");
+                
+                useAuth.setAccessToken(response.data.accessToken);
+                
+                navigate("/")
+            }
         } catch (error) {
             console.error("Error while signing up", error);
             alert("Failed to sign up. Please try again.");

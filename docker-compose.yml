@@ -25,6 +25,15 @@ services:
       - "3001:3001"
     depends_on:
       - db
+    develop:
+      watch:
+        - action: sync
+          path: ./backend/src
+          target: /app/src
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: ./backend/package.json
   db:
     image: postgres:16
     environment:

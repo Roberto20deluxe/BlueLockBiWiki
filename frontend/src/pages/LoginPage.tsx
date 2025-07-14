@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../services/api"
+import { useAuth } from "../services/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -23,13 +24,19 @@ const LoginPage = () => {
         const formData = { email, password }
 
         try {
-            const permission = await api.post('/users/login', formData);
+            const response = await api.post('/users/login', formData)
+            
+            useAuth.setAccessToken(response.data.accessToken);
+            
             form.reset();
-            if (permission.status === 200) {
+            if (response.status === 200) {
                 navigate("/");
             }
-        } catch (err) {
-            console.error(err, "Login error")
+        } catch (err: any) {
+            console.error('Erro no login:', err);
+            if (err.response) {
+                console.error('Resposta do servidor:', err.response.data);
+            }
             alert("Failed to login!")
         }
     }
