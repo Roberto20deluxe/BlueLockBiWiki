@@ -1,12 +1,13 @@
-const express = require('express')
-const router = express.Router()
-const userController = require('../controllers/userController')
+import express from 'express';
+import { getAllUsers, createUser, loginCheck, logoutUser, updateUser, deleteUser } from '../controllers/userController.js';
 
-router.get('/users', userController.getAllUsers);
-router.post('/users', userController.createUser); //Não deve ter um middle entre o requerimento e função
-router.post('/users/login', userController.loginCheck); //Não deve ter um middleware entre o requerimento e função
-router.post('/logout', userController.logoutUser)
-router.put('/users/:id', userController.updateUser);
-router.delete('/users/:id', userController.deleteUser);
+const router = express.Router();
 
-module.exports = router
+router.get('/users', getAllUsers);
+router.post('/users', createUser); //Não deve ter um middle entre o requerimento e função
+router.post('/users/login', loginCheck); //Não deve ter um middleware entre o requerimento e função
+router.post('/logout', logoutUser)
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
+
+export default router;

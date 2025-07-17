@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const TokenController = require('./TokenController');
+import jwt from 'jsonwebtoken';
+import * as TokenController from './TokenController.js';
 
 function authenticateToken(req, res, next) {
     const tokenAuth = req.headers['authorization']
@@ -40,6 +40,6 @@ function authenticateToken(req, res, next) {
     })
 }
 
-module.exports = {
+export {
     authenticateToken
 }

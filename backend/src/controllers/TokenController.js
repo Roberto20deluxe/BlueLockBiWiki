@@ -1,5 +1,7 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken')
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+dotenv.config();
 
 async function newAccessToken(req, res) {
     const token = req.cookies.refreshToken;
@@ -35,7 +37,7 @@ function generateRefreshToken(userId, userEmail) {
     return jwt.sign({ id: userId, email: userEmail}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '15m'})
 }
 
-module.exports = {
+export {
     newAccessToken,
     generateAccessToken,
     generateRefreshToken

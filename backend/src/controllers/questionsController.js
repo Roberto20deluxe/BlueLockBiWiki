@@ -1,4 +1,4 @@
-const prisma = require('../prismaClient')
+import prisma from '../prismaClient.js'
 
 async function getQuestions(req, res){
     try {
@@ -28,7 +28,7 @@ async function createQuestion(req, res){
     }
 }
 
-module.exports = {
+export {
     getQuestions,
     createQuestion
 }

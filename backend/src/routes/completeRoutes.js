@@ -1,8 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const completeController = require('../controllers/completeController')
-const authController = require('../controllers/authController')
+import express from 'express';
+import { getCompleteInfo } from '../controllers/completeController.js';
+import { authenticateToken } from '../controllers/authController.js';
 
-router.get('/complete/:id', authController.authenticateToken, completeController.getCompleteInfo);
+const router = express.Router();
 
-module.exports = router
+router.get('/complete/:id', authenticateToken, getCompleteInfo);
+
+export default router;

@@ -1,9 +1,17 @@
-const express = require('express')
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import userRoutes from './src/routes/userRoutes.js';
+import blPlayerRoutes from './src/routes/blPlayerRoutes.js';
+import questions from './src/routes/questionRoutes.js';
+import responses from './src/routes/responseRoutes.js';
+import complete from './src/routes/completeRoutes.js';
+import refreshTokenRoutes from './src/routes/refreshTokenRoutes.js';
+import aiRoutes from './src/routes/aiRoutes.js';
+
 const app = express()
-const cookieParser = require('cookie-parser')
 app.use(express.json())
 app.use(cookieParser())
-const cors = require('cors')
 
 app.use(cors({
     origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'],
@@ -12,17 +20,12 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'X-New-Access-Token']
 }))
 
-const userRoutes = require('./src/routes/userRoutes')
-const blPlayerRoutes = require('./src/routes/blPlayerRoutes')
-const questions = require('./src/routes/questionRoutes')
-const responses = require('./src/routes/responseRoutes')
-const complete = require('./src/routes/completeRoutes')
-const refreshTokenRoutes = require('./src/routes/refreshTokenRoutes')
 app.use(userRoutes)
 app.use(blPlayerRoutes)
 app.use(questions)
 app.use(responses)
 app.use(complete)
 app.use(refreshTokenRoutes)
+app.use(aiRoutes)
 
 app.listen(3001, '0.0.0.0', () => {console.log("Server started on 3001")})

@@ -8,6 +8,7 @@ import ViewPlayerPage from './pages/ViewPlayerPage'
 import LoginPage from './pages/LoginPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import SignUpPage from './pages/SignUpPage'
+import QuizChat from './pages/QuizChat'
 
 const router = createBrowserRouter([
   { path: "*", element: <NotFoundPage/>},
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
   { path: "/login", element: <LoginPage/> },
   { path: "/register", element: <SignUpPage/> },
   { path: "/view/:id", element: <ViewPlayerPage/> },
-  { path: "/create", element: <PlayerCreationPage/> }
+  { path: "/create", element: <PlayerCreationPage/> },
+  { path: "/chatbot", element: <QuizChat/> }
 ]);
 
 const rootElement = document.getElementById('root');

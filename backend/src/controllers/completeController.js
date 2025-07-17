@@ -1,4 +1,4 @@
-const prisma = require('../prismaClient')
+import prisma from '../prismaClient.js'
 
 async function getCompleteInfo(req, res){
     try {
@@ -13,6 +13,6 @@ async function getCompleteInfo(req, res){
     }
 }
 
-module.exports = {
+export {
     getCompleteInfo
 }

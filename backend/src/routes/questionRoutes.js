@@ -1,9 +1,10 @@
-const express = require('express')
-const router = express.Router()
-const questionsController = require('../controllers/questionsController')
-const authController = require('../controllers/authController')
+import express from 'express';
+import { getQuestions, createQuestion } from '../controllers/questionsController.js';
+import { authenticateToken } from '../controllers/authController.js';
 
-router.get('/questions', authController.authenticateToken, questionsController.getQuestions);
-router.post('/questions', authController.authenticateToken, questionsController.createQuestion);
+const router = express.Router();
 
-module.exports = router
+router.get('/questions', authenticateToken, getQuestions);
+router.post('/questions', authenticateToken, createQuestion);
+
+export default router;

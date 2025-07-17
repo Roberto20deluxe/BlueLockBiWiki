@@ -1,7 +1,9 @@
-require('dotenv').config();
-const prisma = require('../prismaClient')
-const bcrypt = require('bcrypt')
-const TokenController = require("./TokenController")
+import dotenv from 'dotenv';
+import prisma from '../prismaClient.js';
+import bcrypt from 'bcrypt';
+import * as TokenController from "./TokenController.js";
+
+dotenv.config();
 
 async function getAllUsers(req, res){
     try {
@@ -35,14 +37,13 @@ async function createUser(req, res){
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000 // 15 minutos
+            maxAge: 15 * 60 * 1000 //15 minutos
         });
         
         res.status(200).json({ accessToken: token });
      } catch (err) {
         console.error('Erro ao criar usuário:', err);
         
-        // Handle specific Prisma errors
         if (err.code === 'P2002') {
             return res.status(400).json({ error: "Usuário com este email já existe" });
         }
@@ -66,7 +67,7 @@ async function loginCheck(req, res){
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'strict',
-                maxAge: 15 * 60 * 1000 // 15 minutos
+                maxAge: 15 * 60 * 1000 //15 minutos
             });
             
             res.status(200).json({ accessToken: token })
@@ -127,7 +128,7 @@ async function deleteUser(req, res){
     }
 }
 
-module.exports = {
+export {
     getAllUsers,
     createUser,
     loginCheck,

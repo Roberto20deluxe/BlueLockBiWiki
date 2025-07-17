@@ -1,9 +1,10 @@
-const express = require('express')
-const router = express.Router()
-const responseController = require('../controllers/responseController')
-const authController = require('../controllers/authController')
+import express from 'express';
+import { getResponse, createResponse } from '../controllers/responseController.js';
+import { authenticateToken } from '../controllers/authController.js';
 
-router.get('/responses', authController.authenticateToken, responseController.getResponse);
-router.post('/responses', authController.authenticateToken, responseController.createResponse);
+const router = express.Router();
 
-module.exports = router
+router.get('/responses', authenticateToken, getResponse);
+router.post('/responses', authenticateToken, createResponse);
+
+export default router;

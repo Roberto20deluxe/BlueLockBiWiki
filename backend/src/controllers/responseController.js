@@ -1,4 +1,4 @@
-const prisma = require('../prismaClient')
+import prisma from '../prismaClient.js'
 
 async function getResponse(req, res){
     try {
@@ -35,7 +35,7 @@ async function createResponse(req, res){
     }
 }
 
-module.exports = {
+export {
     getResponse,
     createResponse
 }

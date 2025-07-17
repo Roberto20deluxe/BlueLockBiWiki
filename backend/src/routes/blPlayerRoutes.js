@@ -1,11 +1,12 @@
-const express = require('express')
-const router = express.Router()
-const playersController = require('../controllers/playersController')
-const authController = require('../controllers/authController')
+import express from 'express';
+import { getBlPlayers, postBlPlayer, updateBlPlayer, deleteBlPlayer } from '../controllers/playersController.js';
+import { authenticateToken } from '../controllers/authController.js';
 
-router.get('/blplayers', authController.authenticateToken, playersController.getBlPlayers);
-router.post('/blplayers', authController.authenticateToken, playersController.postBlPlayer);
-router.put('/blplayers/:id', authController.authenticateToken, playersController.updateBlPlayer);
-router.delete('/blplayers/:id', authController.authenticateToken, playersController.deleteBlPlayer);
+const router = express.Router();
 
-module.exports = router
+router.get('/blplayers', authenticateToken, getBlPlayers);
+router.post('/blplayers', authenticateToken, postBlPlayer);
+router.put('/blplayers/:id', authenticateToken, updateBlPlayer);
+router.delete('/blplayers/:id', authenticateToken, deleteBlPlayer);
+
+export default router;

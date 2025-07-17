@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "type": "module",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -16,11 +17,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@ai-sdk/google": "^1.2.22",
+    "@ai-sdk/react": "^1.2.12",
+    "ai": "^4.3.18",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@prisma/client": "6.9.0",
@@ -29,6 +34,7 @@
     "nodemon": "^3.1.10",
     "prisma": "^6.9.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
 }

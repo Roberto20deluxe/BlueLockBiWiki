@@ -1,4 +1,4 @@
-const prisma = require('../prismaClient')
+import prisma from '../prismaClient.js'
 
 async function getBlPlayers(req, res){
     try {
@@ -58,7 +58,7 @@ async function deleteBlPlayer(req, res){
     }
 }
 
-module.exports = {
+export {
     getBlPlayers,
     postBlPlayer,
     updateBlPlayer,
